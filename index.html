@@ -131,6 +131,46 @@
             margin-bottom: 20px;
         }
 
+        /* Блоки с эмодзи */
+        .emoji-section {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .emoji {
+            font-size: 3em;
+            margin: 0 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .emoji:hover {
+            transform: scale(1.2);
+        }
+
+        /* Слайдер картинок */
+        .slider {
+            position: relative;
+            max-width: 100%;
+            margin: 50px 0;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .slider img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
         /* Адаптивность для мобильных */
         @media (max-width: 768px) {
             .container {
@@ -189,6 +229,34 @@
                 <p class="text-content">Описание новости. Здесь будет краткое описание статьи с ссылкой на полный текст.</p>
                 <a href="https://www.example.com" target="_blank" class="button">Читать статью</a>
             </div>
+
+            <!-- Галерея изображений -->
+            <h2>Галерея картинок</h2>
+            <div class="gallery">
+                <img src="https://via.placeholder.com/400x250" alt="Gallery Image 1">
+                <img src="https://via.placeholder.com/400x250" alt="Gallery Image 2">
+                <img src="https://via.placeholder.com/400x250" alt="Gallery Image 3">
+            </div>
+
+            <!-- Эмодзи-раздел -->
+            <h2>Эмодзи-раздел</h2>
+            <div class="emoji-section">
+                <div class="emoji">⚔️</div>
+                <div class="emoji">💥</div>
+                <div class="emoji">📰</div>
+                <div class="emoji">🕊️</div>
+                <div class="emoji">🌍</div>
+            </div>
+
+            <!-- Слайдер картинок -->
+            <h2>Слайдер картинок</h2>
+            <div class="slider">
+                <div class="slides">
+                    <div class="slide"><img src="https://via.placeholder.com/800x400" alt="Slider Image 1"></div>
+                    <div class="slide"><img src="https://via.placeholder.com/800x400" alt="Slider Image 2"></div>
+                    <div class="slide"><img src="https://via.placeholder.com/800x400" alt="Slider Image 3"></div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -198,5 +266,28 @@
         <p>&copy; 2025 Интерактивный новостной сайт. Все права защищены.</p>
     </footer>
 
+    <script>
+        // Слайдер для картинок
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlidePosition();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlidePosition();
+        }
+
+        function updateSlidePosition() {
+            const slideWidth = slides[0].offsetWidth;
+            document.querySelector('.slides').style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+        }
+
+        setInterval(nextSlide, 3000);
+    </script>
 </body>
 </html>

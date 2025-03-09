@@ -9,15 +9,15 @@
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0ead6; /* Светлый бежевый фон */
+            background-color: #f0ead6;
             color: #333;
         }
 
         header {
             text-align: center;
             padding: 1.5em 0;
-            border-bottom: 3px solid #c4a89f; /* Легкий контур */
-            background: linear-gradient(to right, #e4d7c4, #d9b8a3); /* Плавный градиент */
+            border-bottom: 3px solid #c4a89f;
+            background: linear-gradient(to right, #e4d7c4, #d9b8a3);
             color: #333;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
             text-transform: uppercase;
@@ -124,13 +124,23 @@
 
         <div class="sidebar">
             <h2>Новости</h2>
-            <p>Ожидайте актуальную информацию о событиях на фронте.</p>
+            <p>Здесь вы можете найти актуальные новости о событиях, происходящих в Курске и вокруг него, в 2025 году. Бои за Курск — важная часть современной военной истории Украины.</p>
+
+            <h2>Аналитика</h2>
+            <p>Следите за подробным анализом происходящих событий. Узнайте о ходе боевых действий, стратегических решениях и результатах операций в регионе.</p>
 
             <div class="controls">
                 <label for="newsDate">Дата новости:</label>
                 <input type="date" id="newsDate" name="newsDate">
                 <button onclick="alert('Новости обновлены!')">Обновить новости</button>
             </div>
+
+            <h2>Местные Новости</h2>
+            <p>Для более детальной информации вы можете перейти в раздел новостей, где представлены материалы о текущей ситуации в регионе.</p>
+
+            <a href="https://news.google.com/search?q=%D0%9A%D1%83%D1%80%D1%81%D0%BA%20%D0%B2%D0%BE%D0%B9%D0%BD%D0%B0%20%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8&hl=ru&gl=UA&ceid=UA%3Aru" target="_blank">
+                <button>Перейти к новостям</button>
+            </a>
         </div>
     </div>
 

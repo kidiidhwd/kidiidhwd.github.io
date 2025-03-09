@@ -1,73 +1,183 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Бои за Курск Карта</title>
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0ead6;
-            color: #333;
-        }
-
-        header {
-            text-align: center;
-            padding: 1.5em 0;
-            border-bottom: 3px solid #c4a89f;
-            background: linear-gradient(to right, #e4d7c4, #d9b8a3);
-            color: #333;
-            text-transform: uppercase;
-        }
-
-        .container {
-            width: 80%;
-            margin: 0 auto;
-        }
-
-        .post {
-            background-color: #fff;
-            padding: 1em;
-            margin: 1em 0;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .pagination {
-            text-align: center;
-            margin-top: 2em;
-        }
-
-        .pagination button {
-            padding: 0.5em 1em;
-            margin: 0 0.5em;
-            border: 1px solid #c4a89f;
-            background-color: #f0ead6;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .pagination button:hover {
-            background-color: #d9b8a3;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Бои за Курск Карта</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0ead6;
+      color: #333;
+    }
+    header {
+      text-align: center;
+      padding: 1.5em 0;
+      border-bottom: 3px solid #c4a89f;
+      background: linear-gradient(to right, #e4d7c4, #d9b8a3);
+      color: #333;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+      text-transform: uppercase;
+    }
+    .container {
+      width: 100%;
+      max-width: 1920px;
+      margin: 0 auto;
+      display: flex;
+      height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .sidebar {
+      width: 300px;
+      padding: 20px;
+      background: linear-gradient(to bottom, #e4d7c4, #d9b8a3);
+      border-radius: 10px;
+      box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+      height: 100%;
+      overflow-y: auto;
+      margin-right: 20px;
+    }
+    .sidebar h2 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #333;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+    .sidebar p {
+      margin-bottom: 20px;
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+    .sidebar .controls {
+      margin-top: 20px;
+    }
+    .sidebar .controls label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+      font-weight: bold;
+    }
+    .sidebar .controls input {
+      width: calc(100% - 12px);
+      padding: 8px;
+      margin-bottom: 15px;
+      background-color: #f5f5dc;
+      color: #333;
+      border: 1px solid #d9b8a3;
+      border-radius: 5px;
+    }
+    .sidebar .nav-item {
+      padding: 12px;
+      margin-bottom: 8px;
+      background-color: #d9b8a3;
+      border: 1px solid #c4a89f;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      display: flex;
+      align-items: center;
+      border-radius: 5px;
+    }
+    .sidebar .nav-item:hover {
+      background-color: #e4d7c4;
+    }
+    .sidebar .nav-item img {
+      margin-right: 10px;
+    }
+    .map-container {
+      flex-grow: 1;
+      position: relative;
+      height: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    /* Стили для модального окна с новостями */
+    #news-modal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.95);
+      display: none;
+      padding: 20px;
+      overflow: hidden;
+      z-index: 10;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+    #news-iframe {
+      width: 100%;
+      height: calc(100% - 50px); /* Оставляем место для кнопки закрытия */
+      border: none;
+      border-radius: 5px;
+    }
+    .close-button {
+      padding: 10px 20px;
+      background-color: #d9b8a3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      margin-top: 10px;
+    }
+    .close-button:hover {
+      background-color: #c4a89f;
+    }
+    .fallback {
+      margin-top: 10px;
+      font-size: 0.9em;
+    }
+  </style>
 </head>
 <body>
-
-<header>
-    <h1>Бои за Курск Карта</h1>
-</header>
-
-<div class="container" id="posts-container">
-    <!-- Посты будут добавляться сюда -->
-</div>
-
-<div class="pagination" id="pagination">
-    <!-- Пагинация будет добавляться сюда -->
-</div>
-
-<script src="script.js"></script>
+  <header>
+    <h1>БОИ ЗА КУРСК КАРТА</h1>
+  </header>
+  <div class="container">
+    <div class="sidebar">
+      <h2>Новости и аналитика</h2>
+      <p>Информация о событиях в Курской области, связанные с военными действиями. <br>
+         Дата: <input type="date" id="news-date" value="2025-03-09">
+      </p>
+      <div class="nav-item" onclick="showNews()">
+        <img src="https://img.icons8.com/material-outlined/24/000000/bar-chart.png" alt="News">
+        Новости
+      </div>
+    </div>
+    <div class="map-container">
+      <iframe id="map-iframe" src="https://www.google.com/maps/d/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1" width="100%" height="100%"></iframe>
+      <!-- Модальное окно для новостей -->
+      <div id="news-modal">
+        <iframe id="news-iframe" src="https://www.pravda.com.ua/search/?q=%D0%9A%D1%83%D1%80%D1%81%D0%BA+%D0%B2%D0%BE%D0%B9%D0%BD%D0%B0+%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8" title="Украинская правда - Курск война новости"></iframe>
+        <button class="close-button" onclick="closeNews()">Закрыть</button>
+        <div class="fallback">
+          Если окно не загрузилось, <a href="#" onclick="openNewsInNewTab(); return false;">откройте в новом окне</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function showNews() {
+      // Пытаемся встроить страницу с новостями
+      document.getElementById("news-iframe").src = "https://www.pravda.com.ua/search/?q=%D0%9A%D1%83%D1%80%D1%81%D0%BA+%D0%B2%D0%BE%D0%B9%D0%BD%D0%B0+%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8";
+      // Показываем модальное окно с новостями и скрываем карту
+      document.getElementById("news-modal").style.display = "block";
+      document.getElementById("map-iframe").style.display = "none";
+    }
+    function closeNews() {
+      // Закрываем окно с новостями и возвращаем карту
+      document.getElementById("news-modal").style.display = "none";
+      document.getElementById("map-iframe").style.display = "block";
+    }
+    function openNewsInNewTab() {
+      var url = document.getElementById("news-iframe").src;
+      window.open(url, "_blank");
+    }
+  </script>
 </body>
 </html>

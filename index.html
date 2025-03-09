@@ -34,6 +34,7 @@
             padding: 20px;
             box-sizing: border-box;
             justify-content: space-between;
+            flex-wrap: wrap;
         }
 
         .map-container {
@@ -43,6 +44,7 @@
             overflow: hidden;
             position: relative;
             transition: all 0.3s ease;
+            margin-bottom: 20px;
         }
 
         .sidebar {
@@ -73,10 +75,9 @@
         .sidebar .flag {
             width: 50px;
             height: 30px;
-            background: linear-gradient(to bottom, #0057b7 50%, #ffd700 50%);
-            border: 2px solid #c4a89f;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/800px-Flag_of_Ukraine.svg.png') no-repeat center center;
+            background-size: contain;
             margin-bottom: 15px;
-            border-radius: 5px;
         }
 
         .sidebar .controls {
@@ -245,6 +246,7 @@
 <div class="container">
     <div class="sidebar">
         <h2>ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ</h2>
+        <div class="flag"></div>
         <p>Здесь информация о военных событиях и героизме украинских воинов в боях за Курск, а также исторические документы и актуальные материалы по теме.</p>
         <div class="nav-item" onclick="showArticle()">
             <img src="https://img.icons8.com/material-outlined/24/000000/bar-chart.png" alt="News">
@@ -263,7 +265,9 @@
 <!-- Модальное окно с новостями -->
 <div id="article-container">
     <h3>Новости о битве за Курск</h3>
-    <p>Здесь появится информация о текущих событиях и новостях, связанных с боем за Курск.</p>
+    <p><strong>Отрывок из новости:</strong> Россия на прошлой неделе перебросила в Курскую область одно из самых эффективных подразделений беспилотников, а также сотни северокорейских военных вместе с морской пехотой и десантниками. Об этом пишет Forbes.</p>
+    <p>Наступление РФ началось в тот момент, когда администрация президента США Дональда Трампа прекратила поставлять Украине разведданные и боеприпасы. Это уже привело к потере части отвоеванных территорий и создает угрозу для главной дороги, ведущей к ключевой украинской военной базе в городе Суджа.</p>
+    <p>Для более подробной информации посетите <a href="https://news.google.com/search?q=битва+за+Курск" target="_blank">Гугл Новости</a>.</p>
     <a href="javascript:void(0);" class="close-button" onclick="closeArticle()">Закрыть</a>
     <a href="javascript:void(0);" class="refresh-button" onclick="refreshArticle()">Обновить</a>
 </div>

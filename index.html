@@ -34,7 +34,6 @@
             padding: 20px;
             box-sizing: border-box;
             justify-content: space-between;
-            flex-wrap: wrap;
         }
 
         .map-container {
@@ -44,7 +43,6 @@
             overflow: hidden;
             position: relative;
             transition: all 0.3s ease;
-            margin-bottom: 20px;
         }
 
         .sidebar {
@@ -56,7 +54,6 @@
             height: 100%;
             overflow-y: auto;
             margin-left: 20px;
-            transition: all 0.3s ease;
         }
 
         .sidebar h2 {
@@ -75,9 +72,10 @@
         .sidebar .flag {
             width: 50px;
             height: 30px;
-            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/800px-Flag_of_Ukraine.svg.png') no-repeat center center;
-            background-size: contain;
+            background: linear-gradient(to bottom, #0057b7 50%, #ffd700 50%);
+            border: 2px solid #c4a89f;
             margin-bottom: 15px;
+            border-radius: 5px;
         }
 
         .sidebar .controls {
@@ -142,131 +140,6 @@
         /* Стиль для текста, который будет появляться вместо карты */
         #article-container {
             position: absolute;
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.97);
-            padding: 20px;
-            box-sizing: border-box;
-            z-index: 10;
-            display: none;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 700px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
-            overflow-y: auto;
-            animation: modalIn 0.5s ease-out;
-        }
-
-        @keyframes modalIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        #article-container h3 {
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
-
-        #article-container p {
-            margin: 10px 0;
-            font-size: 1em;
-        }
-
-        #article-container a {
-            color: #0073e6;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        #article-container a:hover {
-            text-decoration: underline;
-        }
-
-        /* Модальные кнопки */
-        .close-button, .refresh-button {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            background-color: #d9b8a3;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        .close-button:hover, .refresh-button:hover {
-            background-color: #c4a89f;
-            transform: scale(1.05);
-        }
-
-        /* Адаптивные стили */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-
-            .map-container {
-                height: 400px;
-            }
-
-            .sidebar {
-                width: 100%;
-                margin-left: 0;
-                margin-bottom: 20px;
-            }
-
-            iframe {
-                height: 300px;
-            }
-        }
-
-    </style>
-</head>
-<body>
-    <header>Бои за Курск Карта</header>
-    <div class="container">
-        <div class="map-container">
-            <!-- Вставьте карту сюда -->
-            <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1CxUj0e9p9mrDZ6vKnINz1KHNwT0pnThJ" width="640" height="480"></iframe>
-            <div id="article-container">
-                <h3>Новости с фронта</h3>
-                <p>Россия на прошлой неделе перебросила в Курскую область одно из самых эффективных подразделений беспилотников, а также сотни северокорейских военных вместе с морской пехотой и десантниками. Об этом пишет Forbes.</p>
-                <p>Наступление РФ началось в тот момент, когда администрация президента США Дональда Трампа прекратила поставлять Украине разведданные и боеприпасы. Это уже привело к потере части отвоеванных территорий и создает угрозу для главной дороги, ведущей к ключевой украинской военной базе в городе Суджа, отмечает издание.</p>
-                <button class="close-button" onclick="closeArticle()">Закрыть</button>
-            </div>
-        </div>
-
-        <div class="sidebar">
-            <h2>Дополнительная информация</h2>
-            <p>Ситуация в Курской области остается напряженной. Россия продолжает активные действия, а Украина готовит оборону.</p>
-
-            <div class="flag"></div>
-
-            <div class="nav-item" onclick="openArticle()">Новости</div>
-
-            <div class="controls">
-                <label for="search">Поиск по территории</label>
-                <input type="text" id="search" placeholder="Введите запрос...">
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <p>Следить за обстановкой</p>
-    </footer>
-
-    <script>
-        function openArticle() {
-            document.getElementById('article-container').style.display = 'block';
-            document.querySelector('.map-container iframe').style.display = 'none'; // Прячем карту
-        }
-
-        function closeArticle() {
-            document.getElementById('article-container').style.display = 'none';
-            document.querySelector('.map-container iframe').style.display = 'block'; // Показываем карту снова
-        }
-    </script>
-</body>
-</html>
+            top: 0;
+            left: 0;
+            right: 0;

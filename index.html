@@ -221,74 +221,51 @@
             }
         }
 
-        @media (max-width: 480px) {
-            header {
-                font-size: 1.5em;
-            }
-
-            .sidebar, .map-container {
-                padding: 10px;
-            }
-
-            .sidebar .nav-item {
-                padding: 10px;
-            }
-        }
-
     </style>
 </head>
 <body>
-
-<header>
-    <h1>БОИ ЗА КУРСК КАРТА</h1>
-</header>
-
-<div class="container">
-    <div class="sidebar">
-        <h2>ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ</h2>
-        <div class="flag"></div>
-        <p>Здесь информация о военных событиях и героизме украинских воинов в боях за Курск, а также исторические документы и актуальные материалы по теме.</p>
-        <div class="nav-item" onclick="showArticle()">
-            <img src="https://img.icons8.com/material-outlined/24/000000/bar-chart.png" alt="News">
-            Новости
+    <header>Бои за Курск Карта</header>
+    <div class="container">
+        <div class="map-container">
+            <!-- Вставьте карту сюда -->
+            <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1CxUj0e9p9mrDZ6vKnINz1KHNwT0pnThJ" width="640" height="480"></iframe>
+            <div id="article-container">
+                <h3>Новости с фронта</h3>
+                <p>Россия на прошлой неделе перебросила в Курскую область одно из самых эффективных подразделений беспилотников, а также сотни северокорейских военных вместе с морской пехотой и десантниками. Об этом пишет Forbes.</p>
+                <p>Наступление РФ началось в тот момент, когда администрация президента США Дональда Трампа прекратила поставлять Украине разведданные и боеприпасы. Это уже привело к потере части отвоеванных территорий и создает угрозу для главной дороги, ведущей к ключевой украинской военной базе в городе Суджа, отмечает издание.</p>
+                <button class="close-button" onclick="closeArticle()">Закрыть</button>
+            </div>
         </div>
-        <div class="nav-item">
-            <img src="https://img.icons8.com/material-outlined/24/000000/map.png" alt="Map">
-            Обзор карты
+
+        <div class="sidebar">
+            <h2>Дополнительная информация</h2>
+            <p>Ситуация в Курской области остается напряженной. Россия продолжает активные действия, а Украина готовит оборону.</p>
+
+            <div class="flag"></div>
+
+            <div class="nav-item" onclick="openArticle()">Новости</div>
+
+            <div class="controls">
+                <label for="search">Поиск по территории</label>
+                <input type="text" id="search" placeholder="Введите запрос...">
+            </div>
         </div>
     </div>
-    <div class="map-container">
-        <iframe src="https://www.google.com/maps/d/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F"></iframe>
-    </div>
-</div>
 
-<!-- Модальное окно с новостями -->
-<div id="article-container">
-    <h3>Новости о битве за Курск</h3>
-    <p><strong>Отрывок из новости:</strong> Россия на прошлой неделе перебросила в Курскую область одно из самых эффективных подразделений беспилотников, а также сотни северокорейских военных вместе с морской пехотой и десантниками. Об этом пишет Forbes.</p>
-    <p>Наступление РФ началось в тот момент, когда администрация президента США Дональда Трампа прекратила поставлять Украине разведданные и боеприпасы. Это уже привело к потере части отвоеванных территорий и создает угрозу для главной дороги, ведущей к ключевой украинской военной базе в городе Суджа.</p>
-    <p>Для более подробной информации посетите <a href="https://news.google.com/search?q=битва+за+Курск" target="_blank">Гугл Новости</a>.</p>
-    <a href="javascript:void(0);" class="close-button" onclick="closeArticle()">Закрыть</a>
-    <a href="javascript:void(0);" class="refresh-button" onclick="refreshArticle()">Обновить</a>
-</div>
+    <footer>
+        <p>Следить за обстановкой</p>
+    </footer>
 
-<footer>
-    <p>&copy; 2025 Бои за Курск</p>
-</footer>
+    <script>
+        function openArticle() {
+            document.getElementById('article-container').style.display = 'block';
+            document.querySelector('.map-container iframe').style.display = 'none'; // Прячем карту
+        }
 
-<script>
-    function showArticle() {
-        document.getElementById('article-container').style.display = 'block';
-    }
-
-    function closeArticle() {
-        document.getElementById('article-container').style.display = 'none';
-    }
-
-    function refreshArticle() {
-        alert('Статья обновлена!');
-    }
-</script>
-
+        function closeArticle() {
+            document.getElementById('article-container').style.display = 'none';
+            document.querySelector('.map-container iframe').style.display = 'block'; // Показываем карту снова
+        }
+    </script>
 </body>
 </html>

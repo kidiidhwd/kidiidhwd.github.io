@@ -109,6 +109,31 @@
             background-color: #c4a89f;
         }
 
+        .news-item {
+            margin-bottom: 15px;
+            background: #f7f7f7;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-item h3 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        .news-item p {
+            margin: 5px 0;
+        }
+
+        .news-item a {
+            color: #0073e6;
+            text-decoration: none;
+        }
+
+        .news-item a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -118,9 +143,9 @@
 
     <div class="container">
         <div class="sidebar">
-            <div class="nav-item" onclick="showArticle()">
-                <img src="https://img.icons8.com/material-outlined/24/000000/bar-chart.png" alt="Analytics">
-                Аналитика
+            <div class="nav-item" onclick="showNews()">
+                <img src="https://img.icons8.com/material-outlined/24/000000/bar-chart.png" alt="News">
+                Новости
             </div>
         </div>
 
@@ -128,41 +153,32 @@
             <iframe src="https://www.google.com/maps/d/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1" width="100%" height="100%"></iframe>
             <div id="article-container">
                 <div id="news-container"></div>
-                <button class="close-button" onclick="closeArticle()">Закрыть</button>
+                <button class="close-button" onclick="closeNews()">Закрыть</button>
             </div>
         </div>
     </div>
 
     <script>
-        const rssFeedUrl = 'https://news.google.com/rss/search?q=Курск+война&hl=ru&gl=RU&ceid=RU:ru';
-
-        function loadNews() {
-            fetch(rssFeedUrl)
-                .then(response => response.text())
-                .then(data => {
-                    const parser = new DOMParser();
-                    const xml = parser.parseFromString(data, 'application/xml');
-                    const items = xml.querySelectorAll('item');
-
-                    let newsHTML = '';
-                    items.forEach(item => {
-                        const title = item.querySelector('title').textContent;
-                        const link = item.querySelector('link').textContent;
-                        newsHTML += `<div><a href="${link}" target="_blank">${title}</a></div>`;
-                    });
-
-                    document.getElementById('news-container').innerHTML = newsHTML;
-                })
-                .catch(error => console.error('Ошибка загрузки RSS:', error));
-        }
-
-        function showArticle() {
-            loadNews();
+        function showNews() {
+            // Открытие новостей
+            const newsContainer = document.getElementById('news-container');
+            newsContainer.innerHTML = `
+                <div class="news-item">
+                    <h3><a href="https://news.google.com/search?q=%D0%9A%D1%83%D1%80%D1%81%D0%BA%20%D0%B2%D0%BE%D0%B9%D0%BD%D0%B0%20%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8" target="_blank">Новости Курск война</a></h3>
+                    <p>Новые события, связанные с военными действиями в районе Курска...</p>
+                    <p><strong>Источник:</strong> <a href="https://news.google.com/search?q=%D0%9A%D1%83%D1%80%D1%81%D0%BA%20%D0%B2%D0%BE%D0%B9%D0%BD%D0%B0%20%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D1%8C%D0%B8">Google News</a></p>
+                </div>
+                <div class="news-item">
+                    <h3><a href="https://news.google.com/search?q=%D0%9A%D1%83%D1%80%D1%81%D0%BA%20%D0%B2%D0%BE%D0%B9%D0%BD%D0%B0%20%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8" target="_blank">Продолжающиеся бои на территории Курска</a></h3>
+                    <p>Как ситуация развивается в Курской области на фоне военных конфликтов...</p>
+                    <p><strong>Источник:</strong> <a href="https://news.google.com/search?q=%D0%9A%D1%83%D1%80%D1%81%D0%BA%20%D0%B2%D0%BE%D0%B9%D0%BD%D0%B0%20%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8">Google News</a></p>
+                </div>
+            `;
             document.getElementById('article-container').style.display = 'block';
             document.querySelector('.map-container iframe').style.display = 'none';
         }
 
-        function closeArticle() {
+        function closeNews() {
             document.getElementById('article-container').style.display = 'none';
             document.querySelector('.map-container iframe').style.display = 'block';
         }

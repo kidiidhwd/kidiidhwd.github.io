@@ -28,19 +28,18 @@
             max-width: 1920px;
             margin: 0 auto;
             display: flex;
-            height: 100vh;
+            flex-wrap: wrap; /* Поддержка адаптивного поведения */
             padding: 20px;
             box-sizing: border-box;
-            flex-direction: row; /* Горизонтальное расположение по умолчанию */
         }
 
         .map-container {
-            flex-grow: 1;
-            height: 100%;
+            flex: 1;
+            height: 500px;
             border-radius: 10px;
             overflow: hidden;
             position: relative;
-            transition: all 0.3s ease;
+            margin-right: 20px;
         }
 
         .sidebar {
@@ -49,9 +48,8 @@
             background: linear-gradient(to bottom, #e4d7c4, #d9b8a3);
             border-radius: 10px;
             box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
-            height: 100%;
-            overflow-y: auto;
-            margin-left: 20px;
+            height: auto;
+            margin-top: 20px;
         }
 
         .sidebar h2 {
@@ -210,7 +208,6 @@
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
@@ -222,12 +219,6 @@
             <div class="flag"></div>
             <h2>ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ</h2>
             <p>Здесь может быть текст о героизме украинских воинов во время боев за Курск, ссылки на исторические документы и т.д.</p>
-            
-            <div class="controls">
-                <label for="date">Дата:</label>
-                <input type="date" id="date" value="2025-03-09">
-            </div>
-
             <div class="nav-item" onclick="showArticle()">
                 <img src="https://img.icons8.com/material-outlined/24/000000/bar-chart.png" alt="Analytics">
                 Аналитика
@@ -235,9 +226,9 @@
         </div>
 
         <div class="map-container">
-            <iframe src="https://www.google.com/maps/d/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1" width="100%" height="100%"></iframe>
+            <iframe src="https://www.google.com/maps/d/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1"></iframe>
             <div id="article-container">
-                <p>В Курской области Россия сконцентрировала значительные силы для возможного наступления. В частности, было развернуто новейшее подразделение беспилотников, которое уже доказало свою эффективность в предыдущих операциях. Вместе с этим в группировку вошли сотни военных из Северной Кореи, а также российская морская пехота и десантники. Об этом пишет Forbes. Сообщается, что Российские войска воспользовались ослаблением военной поддержки Украины со стороны Запада, приступив к активным наступательным действиям. Это создало угрозу оцепления важных оборонных позиций и усложнило логистику для украинских защитников. Кроме того, "Украинской правде" сообщили в Генеральном штабе Украины, что ситуация в Курске, с августа частично контролируемая украинскими войсками, остается сложной, но контролируемой. Однако пока неизвестно, как именно украинские военные планируют противодействовать новой российской тактике, сочетающей в себе использование элитных подразделений беспилотников и поддержку северокорейских военных. Россия продолжает использовать 177-й полк морской пехоты, 810-ю бригаду морской пехоты и 11-ю десантно-штурмовую бригаду, получивших подкрепление из Северной Кореи. После значительных потерь в предварительных атаках на Курское выступление, 11-й армейский корпус КНДР отошел с линии фронта в декабре или январе, однако впоследствии вернулся с новыми резервами. На стороне Украины большое преимущество в виде беспилотников, однако российские силы в значительной степени ослабили его благодаря активному использованию Центра перспективных беспилотных систем "Рубикон". Дроны "Рубикона" атакуют небольшие участки дорог, насыщая их беспилотными устройствами, наносящими удар по транспортным средствам по разным направлениям.</p>
+                <p>Здесь текст статьи...</p>
                 <button class="close-button" onclick="closeArticle()">Понял</button>
             </div>
         </div>
@@ -247,4 +238,14 @@
         <p>&copy; 2025 Бои за Курск Карта</p>
     </footer>
 
-    <script
+    <script>
+        function showArticle() {
+            document.getElementById("article-container").style.display = "block";
+        }
+
+        function closeArticle() {
+            document.getElementById("article-container").style.display = "none";
+        }
+    </script>
+</body>
+</html>

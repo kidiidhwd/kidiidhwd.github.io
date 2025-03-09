@@ -186,7 +186,7 @@
     .cta-button {
       background-color: #4CAF50;
       color: white;
-      padding: 15px 32px;https://chatgpt.com/c/67cde611-7930-800c-8509-c1030328214e
+      padding: 15px 32px;
       text-align: center;
       font-size: 16px;
       cursor: pointer;
@@ -243,10 +243,36 @@
         Новости
       </div>
       <div class="nav-item">
-        <img src="https://img.icons8.com/material-outlined/24/000000/info.png" alt="Info">
-        История событий
+        <img src="https://img.icons8.com/material-outlined/24/000000/map.png" alt="Map">
+        Обзор карты
       </div>
       <div class="cta-button" onclick="alert('Спасибо за поддержку!')">Поддержать проект</div>
     </div>
     <div class="map-container">
-      <iframe id="map-iframe" src="https://www.google.com/maps/d/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA
+      <iframe id="map-iframe" src="https://www.google.com/maps/d/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1"></iframe>
+    </div>
+  </div>
+  
+  <!-- Модальное окно новостей -->
+  <div id="article-container">
+    <h3>Новости о битве за Курск</h3>
+    <p>Здесь появится информация о текущих событиях и новостях, связанных с боем за Курск.</p>
+    <a href="javascript:void(0);" class="close-button" onclick="closeArticle()">Закрыть</a>
+    <a href="javascript:void(0);" class="refresh-button" onclick="refreshArticle()">Обновить</a>
+  </div>
+
+  <script>
+    function showNews() {
+      document.getElementById('article-container').style.display = 'block';
+    }
+    
+    function closeArticle() {
+      document.getElementById('article-container').style.display = 'none';
+    }
+
+    function refreshArticle() {
+      alert('Статья обновлена!');
+    }
+  </script>
+</body>
+</html>

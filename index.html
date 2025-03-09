@@ -9,15 +9,15 @@
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0ead6; /* Светлый бежевый фон */
+            background-color: #f0ead6; 
             color: #333;
         }
 
         header {
             text-align: center;
             padding: 1.5em 0;
-            border-bottom: 3px solid #c4a89f; /* Легкий контур */
-            background: linear-gradient(to right, #e4d7c4, #d9b8a3); /* Плавный градиент */
+            border-bottom: 3px solid #c4a89f; 
+            background: linear-gradient(to right, #e4d7c4, #d9b8a3); 
             color: #333;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
             text-transform: uppercase;
@@ -28,18 +28,18 @@
             max-width: 1920px;
             margin: 0 auto;
             display: flex;
-            flex-wrap: wrap; /* Поддержка адаптивного поведения */
+            height: 100vh;
             padding: 20px;
             box-sizing: border-box;
         }
 
         .map-container {
-            flex: 1;
-            height: 500px;
+            flex-grow: 1;
+            height: 100%;
             border-radius: 10px;
             overflow: hidden;
             position: relative;
-            margin-right: 20px;
+            transition: all 0.3s ease;
         }
 
         .sidebar {
@@ -48,8 +48,9 @@
             background: linear-gradient(to bottom, #e4d7c4, #d9b8a3);
             border-radius: 10px;
             box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
-            height: auto;
-            margin-top: 20px;
+            height: 100%;
+            overflow-y: auto;
+            margin-left: 20px;
         }
 
         .sidebar h2 {
@@ -57,60 +58,6 @@
             margin-bottom: 15px;
             color: #333;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        .sidebar p {
-            margin-bottom: 20px;
-            font-size: 1.1em;
-            line-height: 1.6;
-        }
-
-        .sidebar .flag {
-            width: 50px;
-            height: 30px;
-            background: linear-gradient(to bottom, #0057b7 50%, #ffd700 50%);
-            border: 2px solid #c4a89f;
-            margin-bottom: 15px;
-            border-radius: 5px;
-        }
-
-        .sidebar .controls {
-            margin-top: 20px;
-        }
-
-        .sidebar .controls label {
-            display: block;
-            margin-bottom: 5px;
-            color: #333;
-            font-weight: bold;
-        }
-
-        .sidebar .controls input {
-            width: calc(100% - 12px);
-            padding: 8px;
-            margin-bottom: 15px;
-            background-color: #f5f5dc;
-            color: #333;
-            border: 1px solid #d9b8a3;
-            border-radius: 5px;
-        }
-
-        footer {
-            background-color: #e4d7c4;
-            color: #333;
-            text-align: center;
-            padding: 1.5em 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            border-top: 2px solid #c4a89f;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 10px;
         }
 
         .sidebar .nav-item {
@@ -133,26 +80,19 @@
             margin-right: 10px;
         }
 
-        /* Стиль для текста, который будет появляться вместо карты */
         #article-container {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный фон */
+            background-color: rgba(255, 255, 255, 0.8); 
             display: none;
             padding: 20px;
             overflow-y: auto;
             z-index: 10;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        }
-
-        #article-container p {
-            margin-bottom: 30px;
-            font-size: 1.2em;
-            line-height: 1.6;
         }
 
         .close-button {
@@ -169,45 +109,7 @@
             background-color: #c4a89f;
         }
 
-        /* Медиазапросы для мобильных устройств */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column; /* Переключаем на вертикальное расположение */
-            }
-
-            .map-container {
-                height: 50vh; /* Карта будет занимать половину экрана */
-            }
-
-            .sidebar {
-                width: 100%; /* Боковая панель будет занимать всю ширину */
-                margin-left: 0; /* Убираем отступ */
-            }
-
-            iframe {
-                height: 100%; /* Устанавливаем высоту для iframe */
-            }
-
-            .sidebar .nav-item {
-                font-size: 14px; /* Уменьшаем размер шрифта */
-            }
-        }
-
-        @media (max-width: 480px) {
-            header h1 {
-                font-size: 18px; /* Уменьшаем размер заголовка для маленьких экранов */
-            }
-
-            .map-container {
-                height: 40vh; /* Карта занимает меньше места на маленьких экранах */
-            }
-
-            footer {
-                padding: 1em 0;
-            }
-        }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -216,9 +118,6 @@
 
     <div class="container">
         <div class="sidebar">
-            <div class="flag"></div>
-            <h2>ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ</h2>
-            <p>Здесь может быть текст о героизме украинских воинов во время боев за Курск, ссылки на исторические документы и т.д.</p>
             <div class="nav-item" onclick="showArticle()">
                 <img src="https://img.icons8.com/material-outlined/24/000000/bar-chart.png" alt="Analytics">
                 Аналитика
@@ -226,25 +125,46 @@
         </div>
 
         <div class="map-container">
-            <iframe src="https://www.google.com/maps/d/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1"></iframe>
+            <iframe src="https://www.google.com/maps/d/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1" width="100%" height="100%"></iframe>
             <div id="article-container">
-                <p>Здесь текст статьи...</p>
-                <button class="close-button" onclick="closeArticle()">Понял</button>
+                <div id="news-container"></div>
+                <button class="close-button" onclick="closeArticle()">Закрыть</button>
             </div>
         </div>
     </div>
 
-    <footer>
-        <p>&copy; 2025 Бои за Курск Карта</p>
-    </footer>
-
     <script>
+        const rssFeedUrl = 'https://news.google.com/rss/search?q=Курск+война&hl=ru&gl=RU&ceid=RU:ru';
+
+        function loadNews() {
+            fetch(rssFeedUrl)
+                .then(response => response.text())
+                .then(data => {
+                    const parser = new DOMParser();
+                    const xml = parser.parseFromString(data, 'application/xml');
+                    const items = xml.querySelectorAll('item');
+
+                    let newsHTML = '';
+                    items.forEach(item => {
+                        const title = item.querySelector('title').textContent;
+                        const link = item.querySelector('link').textContent;
+                        newsHTML += `<div><a href="${link}" target="_blank">${title}</a></div>`;
+                    });
+
+                    document.getElementById('news-container').innerHTML = newsHTML;
+                })
+                .catch(error => console.error('Ошибка загрузки RSS:', error));
+        }
+
         function showArticle() {
-            document.getElementById("article-container").style.display = "block";
+            loadNews();
+            document.getElementById('article-container').style.display = 'block';
+            document.querySelector('.map-container iframe').style.display = 'none';
         }
 
         function closeArticle() {
-            document.getElementById("article-container").style.display = "none";
+            document.getElementById('article-container').style.display = 'none';
+            document.querySelector('.map-container iframe').style.display = 'block';
         }
     </script>
 </body>

@@ -142,16 +142,17 @@
         /* Стиль для текста, который будет появляться вместо карты */
         #article-container {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
             background: rgba(255, 255, 255, 0.97);
             padding: 20px;
             box-sizing: border-box;
             z-index: 10;
             display: none;
             border-radius: 10px;
+            width: 80%;
+            max-width: 700px;
             box-shadow: 0 0 10px rgba(0,0,0,0.3);
             overflow-y: auto;
             animation: modalIn 0.5s ease-out;

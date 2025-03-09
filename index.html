@@ -1,145 +1,275 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Бои за Курск Карта</title>
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0ead6; /* Светлый бежевый фон */
-            color: #333;
-            transition: all 0.3s ease;
-        }
-
-        header {
-            text-align: center;
-            padding: 1.5em 0;
-            border-bottom: 3px solid #c4a89f; /* Легкий контур */
-            background: linear-gradient(to right, #e4d7c4, #d9b8a3); /* Плавный градиент */
-            color: #333;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-            text-transform: uppercase;
-            font-size: 2em;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1920px;
-            margin: 0 auto;
-            display: flex;
-            height: 100vh;
-            padding: 20px;
-            box-sizing: border-box;
-            justify-content: space-between;
-        }
-
-        .map-container {
-            flex-grow: 1;
-            height: 100%;
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .sidebar {
-            width: 300px;
-            padding: 20px;
-            background: linear-gradient(to bottom, #e4d7c4, #d9b8a3);
-            border-radius: 10px;
-            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
-            height: 100%;
-            overflow-y: auto;
-            margin-left: 20px;
-        }
-
-        .sidebar h2 {
-            margin-top: 0;
-            margin-bottom: 15px;
-            color: #333;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        .sidebar p {
-            margin-bottom: 20px;
-            font-size: 1.1em;
-            line-height: 1.6;
-        }
-
-        .sidebar .flag {
-            width: 50px;
-            height: 30px;
-            background: linear-gradient(to bottom, #0057b7 50%, #ffd700 50%);
-            border: 2px solid #c4a89f;
-            margin-bottom: 15px;
-            border-radius: 5px;
-        }
-
-        .sidebar .controls {
-            margin-top: 20px;
-        }
-
-        .sidebar .controls label {
-            display: block;
-            margin-bottom: 5px;
-            color: #333;
-            font-weight: bold;
-        }
-
-        .sidebar .controls input {
-            width: calc(100% - 12px);
-            padding: 8px;
-            margin-bottom: 15px;
-            background-color: #f5f5dc;
-            color: #333;
-            border: 1px solid #d9b8a3;
-            border-radius: 5px;
-        }
-
-        footer {
-            background-color: #e4d7c4;
-            color: #333;
-            text-align: center;
-            padding: 1.5em 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            border-top: 2px solid #c4a89f;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 10px;
-        }
-
-        .sidebar .nav-item {
-            padding: 12px;
-            margin-bottom: 8px;
-            background-color: #d9b8a3;
-            border: 1px solid #c4a89f;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            display: flex;
-            align-items: center;
-            border-radius: 5px;
-        }
-
-        .sidebar .nav-item:hover {
-            background-color: #e4d7c4;
-        }
-
-        .sidebar .nav-item img {
-            margin-right: 10px;
-        }
-
-        /* Стиль для текста, который будет появляться вместо карты */
-        #article-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Бои за Курск Карта</title>
+  <style>
+    /* Общие стили */
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f0ead6, #fff);
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    header {
+      text-align: center;
+      padding: 1.5em 0;
+      border-bottom: 3px solid #c4a89f;
+      background: linear-gradient(to right, #e4d7c4, #d9b8a3);
+      color: #333;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+      text-transform: uppercase;
+      animation: fadeInDown 1s ease-out;
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      min-height: calc(100vh - 80px);
+      padding: 20px;
+      box-sizing: border-box;
+      animation: fadeIn 1.5s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    /* Сайдбар */
+    .sidebar {
+      flex: 0 0 300px;
+      background: linear-gradient(to bottom, #e4d7c4, #d9b8a3);
+      border-radius: 10px;
+      box-shadow: 4px 0 10px rgba(0,0,0,0.2);
+      padding: 20px;
+      margin-right: 20px;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease;
+    }
+    .sidebar:hover {
+      transform: scale(1.02);
+    }
+    .sidebar h2 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #333;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+    .sidebar p {
+      margin-bottom: 20px;
+      font-size: 1em;
+    }
+    .sidebar .controls {
+      margin-top: 20px;
+    }
+    .sidebar .controls label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #333;
+    }
+    .sidebar .controls input {
+      width: calc(100% - 12px);
+      padding: 8px;
+      margin-bottom: 15px;
+      background-color: #f5f5dc;
+      border: 1px solid #d9b8a3;
+      border-radius: 5px;
+      color: #333;
+      transition: border-color 0.3s;
+    }
+    .sidebar .controls input:focus {
+      border-color: #c4a89f;
+      outline: none;
+    }
+    .sidebar .nav-item {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      background-color: #d9b8a3;
+      border: 1px solid #c4a89f;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      margin-bottom: 10px;
+    }
+    .sidebar .nav-item:hover {
+      background-color: #e4d7c4;
+      transform: scale(1.03);
+    }
+    .sidebar .nav-item img {
+      margin-right: 10px;
+    }
+    /* Карта */
+    .map-container {
+      flex: 1;
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      min-height: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+      transition: opacity 0.5s;
+    }
+    /* Модальное окно с новостями */
+    #article-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.97);
+      padding: 20px;
+      overflow-y: auto;
+      z-index: 10;
+      display: none;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      animation: modalIn 0.5s ease-out;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    #article-container h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    #article-container p {
+      margin: 10px 0;
+      font-size: 1em;
+    }
+    #article-container a {
+      color: #0073e6;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    #article-container a:hover {
+      text-decoration: underline;
+    }
+    .close-button, .refresh-button {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #d9b8a3;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    .close-button:hover, .refresh-button:hover {
+      background-color: #c4a89f;
+      transform: scale(1.05);
+    }
+    /* Адаптивные стили */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .sidebar {
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
+      .map-container {
+        min-height: 300px;
+      }
+    }
+    @media (max-width: 480px) {
+      header {
+        font-size: 1.2em;
+      }
+      .sidebar, .map-container {
+        padding: 10px;
+      }
+      .sidebar .nav-item {
+        padding: 10px;
+      }
+      .sidebar .controls input {
+        width: calc(100% - 10px);
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>БОИ ЗА КУРСК КАРТА</h1>
+  </header>
+  <div class="container">
+    <div class="sidebar">
+      <div class="flag"></div>
+      <h2>ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ</h2>
+      <p>
+        Здесь может быть текст о героизме украинских воинов во время боёв за Курск, ссылки на исторические документы и т.д.
+      </p>
+      <div class="controls">
+        <label for="date">Дата:</label>
+        <input type="date" id="date" value="2025-03-09">
+      </div>
+      <div class="nav-item" onclick="showNews()">
+        <img src="https://img.icons8.com/material-outlined/24/000000/bar-chart.png" alt="News">
+        Новости
+      </div>
+    </div>
+    <div class="map-container">
+      <iframe id="map-iframe" src="https://www.google.com/maps/d/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1"></iframe>
+      <!-- Модальное окно с новостями -->
+      <div id="article-container">
+        <h3>Новости Курск война</h3>
+        <p>
+          Здесь вы найдёте свежие материалы по теме <strong>"Курск война новости"</strong>. Узнайте последние обновления и аналитику, связанную с военными событиями в регионе. Дата публикации: <span id="news-date-text">2025-03-09</span>
+        </p>
+        <p>
+          Для получения подробной информации нажмите кнопку «Подробнее», чтобы открыть результаты поиска Google News.
+        </p>
+        <button class="refresh-button" onclick="refreshNews()">Обновить новости</button>
+        <button class="close-button" onclick="closeNews()">Вернуться к карте</button>
+        <p>
+          <a href="https://news.google.com/search?q=%D0%9A%D1%83%D1%80%D1%81%D0%BA%20%D0%B2%D0%BE%D0%B9%D0%BD%D0%B0%20%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8" target="_blank">
+            Перейти на Google News для полного просмотра
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p>&copy; 2025 Бои за Курск Карта</p>
+  </footer>
+  <script>
+    function showNews() {
+      // Обновляем текст даты из поля ввода (если пользователь его изменил)
+      document.getElementById("news-date-text").textContent = document.getElementById("date").value;
+      // Скрываем карту и показываем окно новостей
+      document.getElementById("map-iframe").style.opacity = "0";
+      setTimeout(() => {
+        document.getElementById("map-iframe").style.display = "none";
+        document.getElementById("article-container").style.display = "block";
+      }, 500);
+    }
+    function closeNews() {
+      // Закрываем окно новостей и возвращаем карту
+      document.getElementById("article-container").style.display = "none";
+      document.getElementById("map-iframe").style.display = "block";
+      setTimeout(() => {
+        document.getElementById("map-iframe").style.opacity = "1";
+      }, 100);
+    }
+    function refreshNews() {
+      // Пример: имитация обновления новостей (можно подключить логику для динамической загрузки)
+      alert("Новости обновлены!");
+    }
+  </script>
+</body>
+</html>

@@ -158,7 +158,7 @@
     #article-container a:hover {
       text-decoration: underline;
     }
-    .close-button, .refresh-button, .support-button {
+    .close-button, .refresh-button {
       display: inline-block;
       margin-top: 15px;
       padding: 10px 20px;
@@ -169,20 +169,24 @@
       cursor: pointer;
       transition: background-color 0.3s, transform 0.2s;
     }
-    .close-button:hover, .refresh-button:hover, .support-button:hover {
+    .close-button:hover, .refresh-button:hover {
       background-color: #c4a89f;
       transform: scale(1.05);
     }
-    /* Кнопки языка */
-    .language-selector {
+    /* Языковая кнопка */
+    .language-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #d9b8a3;
       display: flex;
+      justify-content: center;
       align-items: center;
-      margin-top: 10px;
-      margin-left: auto;
-    }
-    .language-selector img {
-      margin-right: 10px;
       cursor: pointer;
+      margin-top: 10px;
+    }
+    .language-btn:hover {
+      background-color: #c4a89f;
     }
     /* Адаптивные стили */
     @media (max-width: 768px) {
@@ -212,7 +216,6 @@
       }
     }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
@@ -233,13 +236,14 @@
         <img src="https://img.icons8.com/material-outlined/24/000000/bar-chart.png" alt="News">
         Новости
       </div>
-      <div class="nav-item support-button">
+      <!-- Кнопка поддержать автора -->
+      <div class="nav-item" onclick="alert('Спасибо за поддержку!')">
+        <img src="https://img.icons8.com/material-outlined/24/000000/heart.png" alt="Support">
         Поддержать автора
       </div>
-      <div class="language-selector">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_Russia.svg/1200px-Flag_of_Russia.svg.png" alt="Russian" title="Русский">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Flag_of_Ukraine.svg/1200px-Flag_of_Ukraine.svg.png" alt="Ukrainian" title="Українська">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/1280px-Flag_of_the_United_States.svg.png" alt="English" title="English">
+      <!-- Кнопка для смены языка -->
+      <div class="language-btn" onclick="changeLanguage()">
+        🇷🇺
       </div>
     </div>
     <div class="map-container">
@@ -284,6 +288,10 @@
     }
     function refreshNews() {
       alert("Новости обновлены!");
+    }
+    function changeLanguage() {
+      // Здесь можно вставить логику для смены языка
+      alert('Язык будет изменён!');
     }
   </script>
 </body>

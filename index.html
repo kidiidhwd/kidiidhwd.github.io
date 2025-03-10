@@ -6,18 +6,36 @@
     <title>КУРСК БОИ 2025</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Slabo+27px&display=swap" rel="stylesheet">
     <style>
-        /* (Оставьте весь CSS код без изменений) */
-        /* ... */
-
+        body { font-family: 'Montserrat', sans-serif; margin: 0; padding: 0; background: #f9f5eb; }
+        header { background: #e4d7c4; padding: 20px; text-align: center; font-size: 24px; font-weight: bold; }
+        .container { display: flex; justify-content: space-between; margin: 20px; }
+        .sidebar { width: 25%; background: #f3f1e3; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); }
+        .sidebar h2 { font-size: 20px; margin-bottom: 20px; }
+        .sidebar p { font-size: 16px; margin-bottom: 20px; }
+        .sidebar-button { padding: 15px; background-color: #d9b8a3; color: white; border: none; width: 100%; border-radius: 10px; cursor: pointer; transition: background-color 0.3s, transform 0.2s; margin-bottom: 10px; }
+        .sidebar-button:hover { background-color: #c4a89f; transform: scale(1.1); }
+        .language-button { margin-top: 10px; cursor: pointer; background: #d9b8a3; color: white; padding: 10px; border-radius: 50%; font-size: 20px; display: inline-block; text-align: center; width: 40px; height: 40px; line-height: 40px; transition: background-color 0.3s; }
+        .language-button:hover { background-color: #c4a89f; }
+        .main-content { flex: 1; padding: 20px; background: #fff; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); width: 75%; }
+        .map { width: 100%; height: 600px; background-color: #d9b8a3; border-radius: 10px; margin-top: 20px; position: relative; }
+        .modal { display: none; position: absolute; top: 0; left: 0; right: 0; background-color: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 10px; z-index: 999; box-sizing: border-box; height: 100%; overflow-y: auto; width: 100%; opacity: 0; transform: scale(0.9); transition: opacity 0.5s, transform 0.5s ease-in-out; }
+        .modal.open { display: block; opacity: 1; transform: scale(1); }
+        .modal-content { background: white; padding: 30px; border-radius: 10px; text-align: center; }
+        .modal-content p { margin-bottom: 20px; font-size: 16px; }
+        .modal-content a { color: #1a73e8; text-decoration: none; font-weight: bold; }
+        .modal-content h3 { font-size: 22px; margin-bottom: 15px; }
+        .modal-content span { font-size: 14px; color: #777; }
+        .modal-content a { color: #1a73e8; font-size: 16px; font-weight: bold; }
+        .close-button { padding: 10px 15px; background-color: #d9b8a3; color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 20px; }
+        .close-button:hover { background-color: #c4a89f; }
+        .support-button { background-color: #4CAF50; padding: 15px; width: 100%; text-align: center; color: white; font-size: 16px; border-radius: 10px; border: none; cursor: pointer; margin-top: 10px; }
+        .support-button:hover { background-color: #45a049; }
+        footer { text-align: center; padding: 10px; margin-top: 30px; background: #e4d7c4; }
+        .date-container { font-size: 18px; margin-top: 10px; margin-bottom: 10px; padding: 10px; background-color: #f3f1e3; border-radius: 8px; width: fit-content; }
         /* Медиа-запросы для адаптивности */
         @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-
-            .sidebar, .main-content {
-                width: 100%;
-            }
+            .container { flex-direction: column; }
+            .sidebar, .main-content { width: 100%; }
         }
     </style>
 </head>
@@ -47,95 +65,4 @@
                     <p>Россия на прошлой неделе перебросила в Курскую область одно из самых эффективных подразделений беспилотников, а также сотни северокорейских военных вместе с морской пехотой и десантниками. Об этом пишет Forbes.</p>
                     <p>Наступление РФ началось в тот момент, когда администрация президента США Дональда Трампа прекратила поставлять Украине разведданные и боеприпасы. Это уже привело к потере части отвоеванных территорий и создает угрозу для главной дороги, ведущей к ключевой украинской военной базе в городе Суджа, отмечает издание.</p>
                     <p><a href="https://news.google.com/search?q=Курск+война+новости" target="_blank">Читать подробнее</a></p>
-                    <button class="close-button" onclick="closeNewsModal()">Закрыть</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="language-modal" class="modal">
-    <div class="modal-content">
-        <h2>Выберите язык</h2>
-        <button onclick="changeLanguage('ru')">Русский</button>
-        <button onclick="changeLanguage('uk')">Українська</button>
-        <button onclick="changeLanguage('en')">English</button>
-        <button class="close-button" onclick="closeLanguageModal()">Закрыть</button>
-    </div>
-</div>
-<footer>
-    <p>&copy; 2025 КУРСК БОИ 2025. Все права защищены.</p>
-</footer>
-<script>
-    let currentLanguage = 'ru';
-    let currentDate = '10.03.2025';
-    const languageContent = {
-        ru: {
-            title: "КУРСК БОИ 2025",
-            sidebarTitle: "Дополнительная информация",
-            sidebarDescription: "Ситуация в Курске остается напряжённой. В последние недели активно происходят изменения на фронте, и украинские войска продолжают борьбу за важные позиции в регионе.",
-            newsButton: "📰 Новости о текущих событиях",
-            supportButton: "💬 Поддержать автора",
-            dateLabel: "Выберите дату:",
-        },
-        uk: {
-            title: "КУРСЬКІ БОЇ 2025",
-            sidebarTitle: "Додаткова інформація",
-            sidebarDescription: "Ситуація в Курську залишається напруженою. Останніми тижнями активно відбуваються зміни на фронті, і українські війська продовжують боротьбу за важливі позиції в регіоні.",
-            newsButton: "📰 Новини про поточні події",
-            supportButton: "💬 Підтримати автора",
-            dateLabel: "Оберіть дату:",
-        },
-        en: {
-            title: "KURSK BATTLES 2025",
-            sidebarTitle: "Additional Information",
-            sidebarDescription: "The situation in Kursk remains tense. In recent weeks, there have been active changes on the front, and Ukrainian forces continue to fight for important positions in the region.",
-            newsButton: "📰 Current Events News",
-            supportButton: "💬 Support the Author",
-            dateLabel: "Select Date:",
-        }
-    };
-
-    function toggleLanguageModal() {
-        document.getElementById('language-modal').classList.toggle('open');
-    }
-
-    function closeLanguageModal() {
-        document.getElementById('language-modal').classList.remove('open');
-    }
-
-    function changeLanguage(lang) {
-        currentLanguage = lang;
-        document.getElementById('site-title').textContent = languageContent[lang].title;
-        document.getElementById('sidebar-title').textContent = languageContent[lang].sidebarTitle;
-        document.getElementById('sidebar-description').textContent = languageContent[lang].sidebarDescription;
-        document.getElementById('news-button').textContent = languageContent[lang].newsButton;
-        document.getElementById('support-button').textContent = languageContent[lang].supportButton;
-        document.getElementById('date-picker').setAttribute("placeholder", languageContent[lang].dateLabel);
-        closeLanguageModal();
-    }
-
-    function toggleNewsModal() {
-        document.getElementById('news-modal').classList.toggle('open');
-    }
-
-    function closeNewsModal() {
-        document.getElementById('news-modal').classList.remove('open');
-    }
-
-    function supportAuthor() {
-        alert("Спасибо за поддержку! Мы ценим вашу помощь в этом проекте.");
-    }
-
-    function changeDate() {
-        const dateInput = document.getElementById('date-picker');
-        const newDate = dateInput.value;
-        currentDate = newDate;
-        if (currentDate === '2025-03-09') {
-            document.getElementById('map-iframe').src = "https://www.google.com/maps/d/u/0/embed?mid=1zZ5X7Kwt1WGYDPihPrG6Gih_8wY6Ae8&ehbc=2E312F&noprof=1";
-        } else {
-            document.getElementById('map-iframe').src = "https://www.google.com/maps/d/u/0/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1";
-        }
-    }
-</script>
-</body>
-</html>
+                    <button class="close-button" onclick

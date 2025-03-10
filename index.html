@@ -188,6 +188,31 @@
     .language-btn:hover {
       background-color: #c4a89f;
     }
+    /* Модальное окно для выбора языка */
+    .language-modal {
+      position: absolute;
+      background: #fff;
+      padding: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      top: 35px;
+      left: -20px;
+      width: 100px;
+      text-align: center;
+      display: none;
+    }
+    .language-modal button {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #d9b8a3;
+      background-color: #f5f5dc;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+    .language-modal button:hover {
+      background-color: #d9b8a3;
+    }
     /* Адаптивные стили */
     @media (max-width: 768px) {
       .container {
@@ -223,7 +248,6 @@
   </header>
   <div class="container">
     <div class="sidebar">
-      <div class="flag"></div>
       <h2>ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ</h2>
       <p>
         Здесь может быть текст о героизме украинских воинов во время боёв за Курск, ссылки на исторические документы и т.д.
@@ -238,12 +262,17 @@
       </div>
       <!-- Кнопка поддержать автора -->
       <div class="nav-item" onclick="alert('Спасибо за поддержку!')">
-        <img src="https://img.icons8.com/material-outlined/24/000000/heart.png" alt="Support">
+        <img src="https://img.icons8.com/emoji/24/000000/dollar-emoji.png" alt="Support"> 
         Поддержать автора
       </div>
       <!-- Кнопка для смены языка -->
-      <div class="language-btn" onclick="changeLanguage()">
-        🇷🇺
+      <div class="language-btn" onclick="toggleLanguageModal()">
+        💰
+      </div>
+      <div id="language-modal" class="language-modal">
+        <button onclick="changeLanguage('ru')">Русский</button>
+        <button onclick="changeLanguage('uk')">Українська</button>
+        <button onclick="changeLanguage('en')">English</button>
       </div>
     </div>
     <div class="map-container">
@@ -289,9 +318,13 @@
     function refreshNews() {
       alert("Новости обновлены!");
     }
-    function changeLanguage() {
-      // Здесь можно вставить логику для смены языка
-      alert('Язык будет изменён!');
+    function toggleLanguageModal() {
+      const modal = document.getElementById('language-modal');
+      modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+    }
+    function changeLanguage(lang) {
+      alert('Язык изменён на: ' + lang);
+      // Здесь можно добавить логику для реального изменения языка на сайте
     }
   </script>
 </body>

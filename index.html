@@ -20,117 +20,270 @@
       padding: 1.5em 0;
       border-bottom: 3px solid #c4a89f;
       background: linear-gradient(to right, #e4d7c4, #d9b8a3);
-      position: relative;
+      color: #333;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+      text-transform: uppercase;
+      animation: fadeInDown 1s ease-out;
     }
-    .language-switch {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: none;
-      background: url('https://upload.wikimedia.org/wikipedia/en/a/a9/Flag_of_the_United_Kingdom.svg') center/cover no-repeat;
-      cursor: pointer;
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      min-height: calc(100vh - 80px);
+      padding: 20px;
+      box-sizing: border-box;
+      animation: fadeIn 1.5s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    /* Сайдбар */
     .sidebar {
       flex: 0 0 300px;
       background: linear-gradient(to bottom, #e4d7c4, #d9b8a3);
       border-radius: 10px;
+      box-shadow: 4px 0 10px rgba(0,0,0,0.2);
       padding: 20px;
       margin-right: 20px;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease;
     }
-    .nav-item {
+    .sidebar:hover {
+      transform: scale(1.02);
+    }
+    .sidebar h2 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #333;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+    .sidebar p {
+      margin-bottom: 20px;
+      font-size: 1em;
+    }
+    .sidebar .controls {
+      margin-top: 20px;
+    }
+    .sidebar .controls label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #333;
+    }
+    .sidebar .controls input {
+      width: calc(100% - 12px);
+      padding: 8px;
+      margin-bottom: 15px;
+      background-color: #f5f5dc;
+      border: 1px solid #d9b8a3;
+      border-radius: 5px;
+      color: #333;
+      transition: border-color 0.3s;
+    }
+    .sidebar .controls input:focus {
+      border-color: #c4a89f;
+      outline: none;
+    }
+    .sidebar .nav-item {
       display: flex;
       align-items: center;
       padding: 12px;
       background-color: #d9b8a3;
+      border: 1px solid #c4a89f;
       border-radius: 5px;
       cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
       margin-bottom: 10px;
     }
-    .support-button {
-      display: block;
-      text-align: center;
-      background: #ff9800;
-      color: white;
-      padding: 12px;
-      border-radius: 5px;
+    .sidebar .nav-item:hover {
+      background-color: #e4d7c4;
+      transform: scale(1.03);
+    }
+    .sidebar .nav-item img {
+      margin-right: 10px;
+    }
+    /* Карта */
+    .map-container {
+      flex: 1;
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      min-height: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+      transition: opacity 0.5s;
+    }
+    /* Модальное окно с новостями */
+    #article-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.97);
+      padding: 20px;
+      overflow-y: auto;
+      z-index: 10;
+      display: none;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      animation: modalIn 0.5s ease-out;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    #article-container h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    #article-container p {
+      margin: 10px 0;
+      font-size: 1em;
+    }
+    #article-container a {
+      color: #0073e6;
       text-decoration: none;
       font-weight: bold;
-      transition: 0.3s;
     }
-    .support-button:hover {
-      background: #e68900;
+    #article-container a:hover {
+      text-decoration: underline;
+    }
+    .close-button, .refresh-button, .support-button {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #d9b8a3;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    .close-button:hover, .refresh-button:hover, .support-button:hover {
+      background-color: #c4a89f;
+      transform: scale(1.05);
+    }
+    /* Кнопки языка */
+    .language-selector {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      margin-left: auto;
+    }
+    .language-selector img {
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    /* Адаптивные стили */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .sidebar {
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
+      .map-container {
+        min-height: 300px;
+      }
+    }
+    @media (max-width: 480px) {
+      header {
+        font-size: 1.2em;
+      }
+      .sidebar, .map-container {
+        padding: 10px;
+      }
+      .sidebar .nav-item {
+        padding: 10px;
+      }
+      .sidebar .controls input {
+        width: calc(100% - 10px);
+      }
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
-    <h1 id="title">БОИ ЗА КУРСК КАРТА</h1>
-    <button class="language-switch" onclick="switchLanguage()"></button>
+    <h1>БОИ ЗА КУРСК КАРТА</h1>
   </header>
   <div class="container">
     <div class="sidebar">
-      <h2 id="info-title">ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ</h2>
-      <p id="info-text">
-        Здесь может быть текст о героизме украинских воинов во время боёв за Курск.
+      <div class="flag"></div>
+      <h2>ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ</h2>
+      <p>
+        Здесь может быть текст о героизме украинских воинов во время боёв за Курск, ссылки на исторические документы и т.д.
       </p>
+      <div class="controls">
+        <label for="date">Дата:</label>
+        <input type="date" id="date" value="2025-03-09">
+      </div>
       <div class="nav-item" onclick="showNews()">
         <img src="https://img.icons8.com/material-outlined/24/000000/bar-chart.png" alt="News">
-        <span id="news-button">Новости</span>
+        Новости
       </div>
-      <a href="https://www.buymeacoffee.com/author" class="support-button" id="support-button">Поддержка автора</a>
+      <div class="nav-item support-button">
+        Поддержать автора
+      </div>
+      <div class="language-selector">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_Russia.svg/1200px-Flag_of_Russia.svg.png" alt="Russian" title="Русский">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Flag_of_Ukraine.svg/1200px-Flag_of_Ukraine.svg.png" alt="Ukrainian" title="Українська">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/1280px-Flag_of_the_United_States.svg.png" alt="English" title="English">
+      </div>
     </div>
     <div class="map-container">
-      <iframe id="map-iframe" src="https://www.google.com/maps/d/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA"></iframe>
+      <iframe id="map-iframe" src="https://www.google.com/maps/d/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1"></iframe>
+      <!-- Модальное окно с новостями -->
+      <div id="article-container">
+        <h3>Новости Курск война</h3>
+        <p>
+          Здесь вы найдёте свежие материалы по теме <strong>"Курск война новости"</strong>. Узнайте последние обновления и аналитику, связанную с военными событиями в регионе. Дата публикации: <span id="news-date-text">2025-03-09</span>
+        </p>
+        <p>
+          Для получения подробной информации нажмите кнопку «Подробнее», чтобы открыть результаты поиска Google News.
+        </p>
+        <button class="refresh-button" onclick="refreshNews()">Обновить новости</button>
+        <button class="close-button" onclick="closeNews()">Вернуться к карте</button>
+        <p>
+          <a href="https://news.google.com/search?q=%D0%9A%D1%83%D1%80%D1%81%D0%BA%20%D0%B2%D0%BE%D0%B9%D0%BD%D0%B0%20%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8" target="_blank">
+            Перейти на Google News для полного просмотра
+          </a>
+        </p>
+      </div>
     </div>
   </div>
   <footer>
-    <p>&copy; 2025 <span id="footer-text">Бои за Курск Карта</span></p>
+    <p>&copy; 2025 Бои за Курск Карта</p>
   </footer>
   <script>
-    const languages = [
-      { code: "ru", flag: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Flag_of_Russia.svg", texts: {
-        title: "БОИ ЗА КУРСК КАРТА",
-        infoTitle: "ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ",
-        infoText: "Здесь может быть текст о героизме украинских воинов во время боёв за Курск.",
-        newsButton: "Новости",
-        supportButton: "Поддержка автора",
-        footerText: "Бои за Курск Карта"
-      }},
-      { code: "uk", flag: "https://upload.wikimedia.org/wikipedia/commons/4/49/Flag_of_Ukraine.svg", texts: {
-        title: "БОЇ ЗА КУРСЬК КАРТА",
-        infoTitle: "ДОДАТКОВА ІНФОРМАЦІЯ",
-        infoText: "Тут може бути текст про героїзм українських воїнів під час боїв за Курськ.",
-        newsButton: "Новини",
-        supportButton: "Підтримка автора",
-        footerText: "Бої за Курськ Карта"
-      }},
-      { code: "en", flag: "https://upload.wikimedia.org/wikipedia/en/a/a9/Flag_of_the_United_Kingdom.svg", texts: {
-        title: "BATTLES FOR KURSK MAP",
-        infoTitle: "ADDITIONAL INFORMATION",
-        infoText: "Here you can find text about the heroism of Ukrainian soldiers during the battles for Kursk.",
-        newsButton: "News",
-        supportButton: "Support the Author",
-        footerText: "Battles for Kursk Map"
-      }}
-    ];
-    let currentLangIndex = 0;
-
-    function switchLanguage() {
-      currentLangIndex = (currentLangIndex + 1) % languages.length;
-      const lang = languages[currentLangIndex];
-      
-      document.getElementById("title").textContent = lang.texts.title;
-      document.getElementById("info-title").textContent = lang.texts.infoTitle;
-      document.getElementById("info-text").textContent = lang.texts.infoText;
-      document.getElementById("news-button").textContent = lang.texts.newsButton;
-      document.getElementById("support-button").textContent = lang.texts.supportButton;
-      document.getElementById("footer-text").textContent = lang.texts.footerText;
-      
-      document.querySelector(".language-switch").style.backgroundImage = `url(${lang.flag})`;
+    function showNews() {
+      document.getElementById("news-date-text").textContent = document.getElementById("date").value;
+      document.getElementById("map-iframe").style.opacity = "0";
+      setTimeout(() => {
+        document.getElementById("map-iframe").style.display = "none";
+        document.getElementById("article-container").style.display = "block";
+      }, 500);
+    }
+    function closeNews() {
+      document.getElementById("article-container").style.display = "none";
+      document.getElementById("map-iframe").style.display = "block";
+      setTimeout(() => {
+        document.getElementById("map-iframe").style.opacity = "1";
+      }, 100);
+    }
+    function refreshNews() {
+      alert("Новости обновлены!");
     }
   </script>
 </body>

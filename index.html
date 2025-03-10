@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>БОИ КУРСК КАРТА</title>
+  <title>КУРСК БОИ 2025</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -81,41 +81,6 @@
       background-color: #c4a89f;
     }
 
-    .language-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.5);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .language-modal-content {
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      display: flex;
-      justify-content: space-around;
-      width: 300px;
-    }
-
-    .language-option {
-      padding: 10px;
-      background-color: #d9b8a3;
-      color: white;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.2s;
-    }
-
-    .language-option:hover {
-      background-color: #c4a89f;
-      transform: scale(1.1);
-    }
-
     .main-content {
       flex: 1;
       padding: 20px;
@@ -131,6 +96,7 @@
       background-color: #d9b8a3;
       border-radius: 10px;
       margin-top: 20px;
+      position: relative;
     }
 
     .modal {
@@ -143,17 +109,16 @@
       padding: 20px;
       border-radius: 10px;
       z-index: 999;
-      width: 100%;
       box-sizing: border-box;
-      height: 600px; /* Размер модального окна такой же, как у карты */
+      height: 100%;
       overflow-y: auto;
+      width: 100%;
     }
 
     .modal-content {
       background: white;
       padding: 30px;
       border-radius: 10px;
-      width: 100%;
       text-align: center;
     }
 
@@ -193,47 +158,38 @@
 </head>
 <body>
   <header>
-    <h1 id="site-title">БОИ КУРСК КАРТА</h1>
+    <h1 id="site-title">КУРСК БОИ 2025</h1>
   </header>
 
   <div class="container">
     <div class="sidebar">
       <div class="language-button" onclick="toggleLanguageModal()">🌍</div>
       <h2 id="sidebar-title">Дополнительная информация</h2>
-      <p>Ситуация в Курске остаётся напряжённой. В последние недели активно происходят изменения на фронте, а украинские войска продолжают свою борьбу за важные позиции в регионе.</p>
+      <p id="sidebar-description">Ситуация в Курске остается напряжённой. В последние недели активно происходят изменения на фронте, и украинские войска продолжают борьбу за важные позиции в регионе.</p>
       <button class="sidebar-button" id="news-button" onclick="toggleNewsModal()">Новости о текущих событиях</button>
-      <button class="sidebar-button" onclick="supportAuthor()">Поддержать автора</button>
-      <div id="language-modal" class="language-modal">
-        <div class="language-modal-content">
-          <div class="language-option" onclick="changeLanguage('ru')">Русский</div>
-          <div class="language-option" onclick="changeLanguage('uk')">Українська</div>
-          <div class="language-option" onclick="changeLanguage('en')">English</div>
-        </div>
-      </div>
     </div>
 
     <div class="main-content">
       <div id="map" class="map">
         <!-- Вставленная карта -->
         <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1" width="800" height="600"></iframe>
+        <!-- Модальное окно новостей -->
+        <div id="news-modal" class="modal">
+          <div class="modal-content">
+            <p><strong>Ситуация в Курске</strong></p>
+            <p>Россия на прошлой неделе перебросила в Курскую область одно из самых эффективных подразделений беспилотников, а также сотни северокорейских военных вместе с морской пехотой и десантниками. Об этом пишет Forbes.</p>
+            <p>Наступление РФ началось в тот момент, когда администрация президента США Дональда Трампа прекратила поставлять Украине разведданные и боеприпасы. Это уже привело к потере части отвоеванных территорий и создает угрозу для главной дороги, ведущей к ключевой украинской военной базе в городе Суджа, отмечает издание.</p>
+            <p><a href="https://news.google.com/search?q=Курск+война+новости" target="_blank">Читать подробнее</a></p>
+            <button class="close-button" onclick="closeNewsModal()">Закрыть</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <footer>
-    <p>Автор: Ваше Имя</p>
+    <p>КУРСК БОИ 2025</p>
   </footer>
-
-  <!-- Модальное окно новостей -->
-  <div id="news-modal" class="modal">
-    <div class="modal-content">
-      <p><strong>Ситуация в Курске</strong></p>
-      <p>Россия на прошлой неделе перебросила в Курскую область одно из самых эффективных подразделений беспилотников, а также сотни северокорейских военных вместе с морской пехотой и десантниками. Об этом пишет Forbes.</p>
-      <p>Наступление РФ началось в тот момент, когда администрация президента США Дональда Трампа прекратила поставлять Украине разведданные и боеприпасы. Это уже привело к потере части отвоеванных территорий и создает угрозу для главной дороги, ведущей к ключевой украинской военной базе в городе Суджа, отмечает издание.</p>
-      <p><a href="https://news.google.com/search?q=Курск+война+новости" target="_blank">Читать подробнее</a></p>
-      <button class="close-button" onclick="closeNewsModal()">Закрыть</button>
-    </div>
-  </div>
 
   <script>
     let currentLanguage = 'ru';
@@ -252,34 +208,32 @@
     function loadContentBasedOnLanguage(language) {
       const title = document.getElementById('site-title');
       const sidebarTitle = document.getElementById('sidebar-title');
+      const sidebarDescription = document.getElementById('sidebar-description');
 
       // Содержимое для разных языков
       if (language === 'ru') {
-        title.textContent = 'БОИ КУРСК КАРТА';
+        title.textContent = 'КУРСК БОИ 2025';
         sidebarTitle.textContent = 'Дополнительная информация';
+        sidebarDescription.textContent = 'Ситуация в Курске остается напряжённой. В последние недели активно происходят изменения на фронте, и украинские войска продолжают борьбу за важные позиции в регионе.';
       } else if (language === 'uk') {
-        title.textContent = 'БОЇ КУРСЬК КАРТА';
+        title.textContent = 'КУРСЬКІ БОЇ 2025';
         sidebarTitle.textContent = 'Додаткова інформація';
+        sidebarDescription.textContent = 'Ситуація в Курську залишається напруженою. Останнім часом активно відбуваються зміни на фронті, і українські війська продовжують боротьбу за важливі позиції в регіоні.';
       } else if (language === 'en') {
-        title.textContent = 'BATTLES KURSK MAP';
+        title.textContent = 'KURSK BATTLES 2025';
         sidebarTitle.textContent = 'Additional Information';
+        sidebarDescription.textContent = 'The situation in Kursk remains tense. In recent weeks, significant changes have occurred on the front, with Ukrainian troops continuing to fight for key positions in the region.';
       }
     }
 
     function toggleNewsModal() {
       const modal = document.getElementById('news-modal');
       modal.style.display = 'block';
-      document.getElementById('map').style.display = 'none'; // Скрыть карту
     }
 
     function closeNewsModal() {
       const modal = document.getElementById('news-modal');
       modal.style.display = 'none';
-      document.getElementById('map').style.display = 'block'; // Вернуть карту
-    }
-
-    function supportAuthor() {
-      alert('Спасибо за вашу поддержку!');
     }
   </script>
 </body>

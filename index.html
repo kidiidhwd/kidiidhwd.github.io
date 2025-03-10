@@ -113,6 +113,15 @@
       height: 100%;
       overflow-y: auto;
       width: 100%;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.5s, transform 0.5s ease-in-out;
+    }
+
+    .modal.open {
+      display: block;
+      opacity: 1;
+      transform: scale(1);
     }
 
     .modal-content {
@@ -147,6 +156,23 @@
       background-color: #c4a89f;
     }
 
+    .support-button {
+      background-color: #4CAF50;
+      padding: 15px;
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .support-button:hover {
+      background-color: #45a049;
+    }
+
     footer {
       text-align: center;
       padding: 10px;
@@ -167,6 +193,7 @@
       <h2 id="sidebar-title">Дополнительная информация</h2>
       <p id="sidebar-description">Ситуация в Курске остается напряжённой. В последние недели активно происходят изменения на фронте, и украинские войска продолжают борьбу за важные позиции в регионе.</p>
       <button class="sidebar-button" id="news-button" onclick="toggleNewsModal()">Новости о текущих событиях</button>
+      <button class="support-button" onclick="supportAuthor()">Поддержать автора</button>
     </div>
 
     <div class="main-content">
@@ -228,12 +255,20 @@
 
     function toggleNewsModal() {
       const modal = document.getElementById('news-modal');
-      modal.style.display = 'block';
+      modal.classList.add('open');
+      const map = document.getElementById('map');
+      map.style.display = 'none'; // Скрыть карту
     }
 
     function closeNewsModal() {
       const modal = document.getElementById('news-modal');
-      modal.style.display = 'none';
+      modal.classList.remove('open');
+      const map = document.getElementById('map');
+      map.style.display = 'block'; // Вернуть карту обратно
+    }
+
+    function supportAuthor() {
+      alert('Спасибо за вашу поддержку!');
     }
   </script>
 </body>

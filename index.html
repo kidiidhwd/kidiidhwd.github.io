@@ -262,12 +262,12 @@
       </div>
       <!-- Кнопка поддержать автора -->
       <div class="nav-item" onclick="alert('Спасибо за поддержку!')">
-        <img src="https://img.icons8.com/emoji/24/000000/dollar-emoji.png" alt="Support"> 
+        <span>&#127466;&#127480;</span> <!-- Код для эмодзи мирового флага -->
         Поддержать автора
       </div>
       <!-- Кнопка для смены языка -->
       <div class="language-btn" onclick="toggleLanguageModal()">
-        💰
+        🌍
       </div>
       <div id="language-modal" class="language-modal">
         <button onclick="changeLanguage('ru')">Русский</button>
@@ -319,13 +319,4 @@
       alert("Новости обновлены!");
     }
     function toggleLanguageModal() {
-      const modal = document.getElementById('language-modal');
-      modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
-    }
-    function changeLanguage(lang) {
-      alert('Язык изменён на: ' + lang);
-      // Здесь можно добавить логику для реального изменения языка на сайте
-    }
-  </script>
-</body>
-</html>
+      const

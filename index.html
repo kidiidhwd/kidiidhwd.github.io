@@ -122,11 +122,12 @@
       background: #fff;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 75%; /* Увеличено пространство для карты */
     }
 
     .map {
       width: 100%;
-      height: 500px;
+      height: 600px; /* Увеличена высота карты */
       background-color: #d9b8a3;
       border-radius: 10px;
       margin-top: 20px;
@@ -196,12 +197,12 @@
 </head>
 <body>
   <header>
-    <h1 id="site-title">Бои за Курск</h1>
+    <h1 id="site-title">Бои за Курск 2025</h1>
   </header>
 
   <div class="container">
     <div class="sidebar">
-      <div class="language-button" onclick="toggleLanguageModal()">🕊️</div>
+      <div class="language-button" onclick="toggleLanguageModal()">🌍</div>
       <h2 id="sidebar-title">Новости</h2>
       <p id="sidebar-text">Здесь отображается информация о текущих событиях на фронте и новости, которые важны для данной темы. Для подробностей перейдите на <a href="https://news.google.com" target="_blank">Google Новости</a>.</p>
       <button class="sidebar-button" id="support-author-button">
@@ -220,7 +221,7 @@
       <div id="news-modal" class="language-modal">
         <div class="language-modal-content">
           <h3>Курс к бою</h3>
-          <p>Для подробной информации по теме боев на Курской дуге, переходите по ссылке: <a href="https://news.google.com/search?q=%D0%9A%D1%83%D1%80%D1%81%D0%BA" target="_blank">Google Новости</a></p>
+          <p>Для подробной информации по теме боев в Курске 2025 года, переходите по ссылке: <a href="https://news.google.com/search?q=%D0%9A%D1%83%D1%80%D1%81%D0%BA" target="_blank">Google Новости</a></p>
           <button onclick="closeNewsModal()">Закрыть</button>
         </div>
       </div>
@@ -229,7 +230,7 @@
     <div class="main-content">
       <div id="map" class="map">
         <!-- Вставленная карта -->
-        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>
+        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1" width="800" height="600"></iframe>
       </div>
     </div>
   </div>
@@ -260,36 +261,28 @@
 
       // Содержимое для разных языков
       if (language === 'ru') {
-        title.textContent = 'Бои за Курск';
+        title.textContent = 'Бои за Курск 2025';
         sidebarTitle.textContent = 'Новости';
         sidebarText.innerHTML = 'Здесь отображается информация о текущих событиях на фронте и новости, которые важны для данной темы. Для подробностей перейдите на <a href="https://news.google.com" target="_blank">Google Новости</a>.';
         alertBox.textContent = 'Ошибка загрузки новостей. Попробуйте еще раз.';
       } else if (language === 'uk') {
-        title.textContent = 'Бої за Курськ';
+        title.textContent = 'Бої за Курськ 2025';
         sidebarTitle.textContent = 'Новини';
         sidebarText.innerHTML = 'Тут відображаються новини та важлива інформація про бої на Курській дузі. Для подробиць перейдіть на <a href="https://news.google.com" target="_blank">Google Новини</a>.';
         alertBox.textContent = 'Помилка завантаження новин. Спробуйте ще раз.';
       } else if (language === 'en') {
-        title.textContent = 'Battles for Kursk';
+        title.textContent = 'Battles for Kursk 2025';
         sidebarTitle.textContent = 'News';
-        sidebarText.innerHTML = 'Here is the information about the ongoing battles on the Kursk Front. For more details, visit <a href="https://news.google.com" target="_blank">Google News</a>.';
+        sidebarText.innerHTML = 'Here is the information about the ongoing battles on the Kursk Front in 2025. For more details, visit <a href="https://news.google.com" target="_blank">Google News</a>.';
         alertBox.textContent = 'Error loading news. Please try again.';
       }
     }
 
     function toggleNewsModal() {
       const modal = document.getElementById('news-modal');
-      const map = document.getElementById('map');
       modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
-      map.style.display = modal.style.display === 'block' ? 'none' : 'block';
+      document.getElementById('map').style.display = modal.style.display === 'block' ? 'none' : 'block';
     }
 
     function closeNewsModal() {
       const modal = document.getElementById('news-modal');
-      const map = document.getElementById('map');
-      modal.style.display = 'none';
-      map.style.display = 'block';
-    }
-  </script>
-</body>
-</html>

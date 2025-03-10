@@ -3,227 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Боись за курс</title>
+    <title>Бои за Курск</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
+            background: #f9f5eb;
+        }
+
+        header {
+            background: #e4d7c4;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
         }
 
         .container {
             display: flex;
-            flex-wrap: wrap;
             justify-content: space-between;
+            margin: 20px;
         }
 
-        /* Кнопки */
-        .button {
-            padding: 15px;
-            background-color: #f0c14b;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: transform 0.3s ease-in-out;
-            width: 250px;
-            text-align: center;
-            margin: 10px;
-        }
-
-        .button:hover {
-            transform: scale(1.05);
-        }
-
-        /* Стили для модальных окон */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-            overflow: auto;
-        }
-
-        .modal-content {
-            position: absolute;
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #fff;
+        .sidebar {
+            width: 25%;
+            background: #f3f1e3;
             padding: 20px;
             border-radius: 10px;
-            width: 80%;
-            max-width: 400px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
+        .sidebar h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
         }
 
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .language-btn {
-            display: inline-flex;
-            align-items: center;
+        .sidebar p {
             font-size: 16px;
-            padding: 10px;
-            background-color: #f0c14b;
-            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .sidebar-button {
+            padding: 15px;
+            background-color: #d9b8a3;
+            color: white;
+            border: none;
+            width: 100%;
+            border-radius: 10px;
             cursor: pointer;
-            margin: 10px;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .language-btn img {
-            margin-right: 8px;
+        .sidebar-button:hover {
+            background-color: #c4a89f;
+            transform: scale(1.1);
         }
 
-        /* Текст для новостей */
-        .news-text {
+        .sidebar-button span {
+            margin-left: 5px;
+        }
+
+        .language-button {
+            cursor: pointer;
+            background: #d9b8a3;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            font-size: 20px;
+            display: inline-block;
+            text-align: center;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            transition: background-color 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .language-button:hover {
+            background-color: #c4a89f;
+        }
+
+        .language-modal {
             display: none;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-            animation: fadeIn 0.5s ease-in-out;
+            position: absolute; /* Changed to absolute */
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            border-radius:10px;
+            padding: 10px;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        .language-modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+        }
+
+        .language-option {
+            padding: 10px;
+            background-color: #d9b8a3;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-bottom: 10px;
+        }
+
+        .language-option:hover {
+            background-color: #c4a89f;
+            transform: scale(1.1);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .map {
             width: 100%;
-            height: 480px;
-            border: none;
+            height: 500px;
+            background-color: #d9b8a3;
+            border-radius: 10px;
+            margin-top: 20px;
         }
 
-        /* Карта и новости */
-        .map-container, .news-container {
-            flex: 1 1 45%;
-            margin: 20px;
+        footer {
+            text-align: center;
+            padding: 10px;
+            margin-top: 30px;
+            background: #e4d7c4;
         }
 
-        /* Новый стиль кнопки */
-        .button {
+        .popup {
+            background-color: #f5f5f5;
+            border-radius: 10px;
             padding: 15px;
-            background-color: #f0c14b;
-            border: none;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .popup-button {
+            background-color: #e7a149;
+            color: white;
+            padding: 12px;
+            font-size: 14px;
             border-radius: 8px;
+            border: none;
             cursor: pointer;
-            font-size: 18px;
-            width: 300px;
-            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .popup-button:hover {
+            background-color: #d7853b;
+            transform: scale(1.05);
+        }
+
+        @keyframes modalAnimation {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-content {
+            animation: modalAnimation 0.3s ease-out;
+        }
+
+        .alert-box {
+            background-color: #f44336;
+            color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-size: 16px;
+            display: none;
+        }
+
+        #news-modal {
+            display: none;
+        }
+
+        .close-button {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            align-self: flex-end;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1 id="site-title">Бои за Курск</h1>
+    </header>
 
-<div class="container">
-    <!-- Левая часть с новостями и поддержкой -->
-    <div class="news-container">
-        <button class="button" id="newsBtn">Новости 📰</button>
-        <button class="button" id="supportBtn">Поддержка автора 💵</button>
-        <div id="newsText" class="news-text">
-            <p>Россия на прошлой неделе перебросила в Курскую область одно из самых эффективных подразделений беспилотников, а также сотни северокорейских военных вместе с морской пехотой и десантниками. Об этом пишет Forbes.</p>
-            <p>Наступление РФ началось в тот момент, когда администрация президента США Дональда Трампа прекратила поставлять Украине разведданные и боеприпасы. Это уже привело к потере части отвоеванных территорий и создает угрозу для главной дороги, ведущей к ключевой украинской военной базе в городе Суджа, отмечает издание.</p>
-            <a href="https://news.google.com/search?q=%D0%9A%D1%83%D1%80%D1%81%D0%BA%20%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8%20%D0%B2%D0%BE%D0%B9%D0%BD%D0%B0" target="_blank">Следить за обстановкой</a>
+    <div class="container">
+        <div class="sidebar">
+            <div class="language-button" onclick="toggleLanguageModal()" id="language-icon">🇷🇺</div>
+            <div id="language-modal" class="language-modal">
+                <div class="language-modal-content">
+                    <button class="close-button" onclick="toggleLanguageModal()">×</button>
+                    <div class="language-option" onclick="changeLanguage('ru')">🇷🇺 Русский</div>
+                    <div class="language-option" onclick="changeLanguage('uk')">🇺🇦 Українська</div>
+                    <div class="language-option" onclick="changeLanguage('en')">🇺🇸 English</div>
+                </div>
+            </div>
+            <h2 id="sidebar-title">Новости</h2>
+            <p id="sidebar-text">Здесь отображается информация о текущих событиях на фронте и новости, которые важны для данной темы. Для подробностей перейдите на <a href="https://news.google.com" target="_blank">Google Новости</a>.</p>
+            <button class="sidebar-button" id="support-author-button">
+                Поддержать автора <span>💰</span>
+            </button>
+            <button class="sidebar-button" id="news-button" onclick="toggleNewsModal()">Новости <span>📰</span></button>
+            <div id="alert-box" class="alert-box">Ошибка загрузки новостей. Попробуйте еще раз.</div>
         </div>
-    </div>
 
-    <!-- Правая часть с картой -->
-    <div class="map-container">
-        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>
-    </div>
-</div>
+        <div class="main-content">
+            <div id="map" class="map">
+                <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>
+            </div>
 
-<!-- Модальные окна -->
-<div id="languageModal" class="modal">
-    <div class="modal-content">
-        <span class="close" id="closeLanguageModal">&times;</span>
-        <button class="language-btn" id="rusBtn">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Flag_of_Russia.svg/2560px-Flag_of_Russia.svg.png" alt="Russia Flag" width="20" height="15"> Русский
-        </button>
-        <button class="language-btn" id="ukrBtn">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/2560px-Flag_of_Ukraine.svg.png" alt="Ukraine Flag" width="20" height="15"> Українська
-        </button>
-        <button class="language-btn" id="engBtn">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/2560px-Flag_of_the_United_States.svg.png" alt="English Flag" width="20" height="15"> English
-        </button>
-    </div>
-</div>
-
-<!-- Скрипты -->
-<script>
-    // Открытие новостей
-    const newsBtn = document.getElementById('newsBtn');
-    const newsText = document.getElementById('newsText');
-    const iframe = document.querySelector('iframe');
-    newsBtn.addEventListener('click', () => {
-        newsText.style.display = 'block';
-        iframe.style.display = 'none';  // Скрыть карту
-        newsText.classList.add('fadeIn'); // Добавить анимацию
-    });
-
-    // Закрытие новостей
-    const closeNews = document.getElementById('closeNewsBtn');
-    closeNews && closeNews.addEventListener('click', () => {
-        newsText.style.display = 'none';
-        iframe.style.display = 'block';  // Показать карту
-    });
-
-    // Открытие модального окна выбора языка
-    const languageBtn = document.getElementById('languageBtn');
-    const languageModal = document.getElementById('languageModal');
-    languageBtn.addEventListener('click', () => {
-        languageModal.style.display = 'block';
-    });
-
-    // Закрытие модального окна
-    const closeLanguageModal = document.getElementById('closeLanguageModal');
-    closeLanguageModal.addEventListener('click', () => {
-        languageModal.style.display = 'none';
-    });
-
-    // Выбор языка
-    const rusBtn = document.getElementById('rusBtn');
-    const ukrBtn = document.getElementById('ukrBtn');
-    const engBtn = document.getElementById('engBtn');
-
-    rusBtn.addEventListener('click', () => {
-        document.documentElement.lang = 'ru';
-        location.reload();  // Перезагрузка страницы на русском
-    });
-
-    ukrBtn.addEventListener('click', () => {
-        document.documentElement.lang = 'uk';
-        location.reload();  // Перезагрузка страницы на украинском
-    });
-
-    engBtn.addEventListener('click', () => {
-        document.documentElement.lang = 'en';
-        location.reload();  // Перезагрузка страницы на английском
-    });
-</script>
-
-</body>
-</html>
+            <div id="news-modal" class="modal-content">
+                <h3>

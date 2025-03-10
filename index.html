@@ -264,4 +264,13 @@
     function closeNewsModal() {
       const modal = document.getElementById('news-modal');
       modal.classList.remove('open');
-      const map = document.getElementById('map')
+      const map = document.getElementById('map');
+      map.style.display = 'block'; // Вернуть карту обратно
+    }
+
+    function supportAuthor() {
+      alert('Спасибо за вашу поддержку!');
+    }
+  </script>
+</body>
+</html>

@@ -201,10 +201,6 @@
       font-size: 18px;
       margin-top: 10px;
       margin-bottom: 10px;
-      border: 2px solid #d9b8a3;
-      padding: 10px;
-      border-radius: 5px;
-      background-color: #fff;
     }
 
   </style>
@@ -236,4 +232,68 @@
         <!-- Модальное окно новостей -->
         <div id="news-modal" class="modal">
           <div class="modal-content">
-            <h3>Новости на 10.03.2025</h
+            <h3>Новости на 10.03.2025</h3>
+            <span>Сегодняшняя информация:</span>
+            <p>Россия на прошлой неделе перебросила в Курскую область одно из самых эффективных подразделений беспилотников, а также сотни северокорейских военных вместе с морской пехотой и десантниками. Об этом пишет Forbes.</p>
+            <p>Наступление РФ началось в тот момент, когда администрация президента США Дональда Трампа прекратила поставлять Украине разведданные и боеприпасы. Это уже привело к потере части отвоеванных территорий и создает угрозу для главной дороги, ведущей к ключевой украинской военной базе в городе Суджа, отмечает издание.</p>
+            <p><a href="https://news.google.com/search?q=Курск+война+новости" target="_blank">Читать подробнее</a></p>
+            <button class="close-button" onclick="closeNewsModal()">Закрыть</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно выбора языка -->
+  <div id="language-modal" class="modal">
+    <div class="modal-content">
+      <h2>Выберите язык</h2>
+      <button onclick="changeLanguage('ru')">Русский</button>
+      <button onclick="changeLanguage('uk')">Українська</button>
+      <button onclick="changeLanguage('en')">English</button>
+      <button class="close-button" onclick="closeLanguageModal()">Закрыть</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 КУРСК БОИ 2025. Все права защищены.</p>
+  </footer>
+
+  <script>
+    let currentLanguage = 'ru';
+    let currentDate = '10.03.2025';
+
+    function toggleLanguageModal() {
+      document.getElementById('language-modal').classList.toggle('open');
+    }
+
+    function closeLanguageModal() {
+      document.getElementById('language-modal').classList.remove('open');
+    }
+
+    function changeLanguage(lang) {
+      currentLanguage = lang;
+      // Здесь должен быть код для изменения контента в зависимости от выбранного языка
+      closeLanguageModal();
+    }
+
+    function toggleNewsModal() {
+      document.getElementById('news-modal').classList.toggle('open');
+    }
+
+    function closeNewsModal() {
+      document.getElementById('news-modal').classList.remove('open');
+    }
+
+    function supportAuthor() {
+      window.location.href = 'https://www.example.com/support';
+    }
+
+    function changeDate() {
+      const dateInput = document.getElementById('date-picker');
+      const newDate = dateInput.value;
+      currentDate = newDate;
+
+      if (currentDate === '2025-03-09') {
+        document.getElementById('map-iframe').src = "https://www.google.com/maps/d/u/0/embed?mid=1zZ5X7Kwt1WGYDPihPrG6Gih_8wY6Ae8&ehbc=2E312F&noprof=1";
+      } e

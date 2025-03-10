@@ -222,14 +222,15 @@
     let currentLanguage = 'ru';
 
     function toggleLanguageModal() {
-      const modal = document.getElementById('language-modal');
-      modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
-    }
-
-    function changeLanguage(language) {
-      currentLanguage = language;
-      loadContentBasedOnLanguage(language);
-      document.getElementById('language-modal').style.display = 'none';
+      // Просто переключаем язык при нажатии на иконку планеты 🌍
+      if (currentLanguage === 'ru') {
+        currentLanguage = 'uk';
+      } else if (currentLanguage === 'uk') {
+        currentLanguage = 'en';
+      } else {
+        currentLanguage = 'ru';
+      }
+      loadContentBasedOnLanguage(currentLanguage);
     }
 
     function loadContentBasedOnLanguage(language) {
@@ -263,13 +264,4 @@
     function closeNewsModal() {
       const modal = document.getElementById('news-modal');
       modal.classList.remove('open');
-      const map = document.getElementById('map');
-      map.style.display = 'block'; // Вернуть карту обратно
-    }
-
-    function supportAuthor() {
-      alert('Спасибо за вашу поддержку!');
-    }
-  </script>
-</body>
-</html>
+      const map = document.getElementById('map')

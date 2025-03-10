@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>КУРСК БОИ 2025</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Slabo+27px&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Slabo+27px&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       margin: 0;
       padding: 0;
       background: #f9f5eb;
@@ -197,6 +197,12 @@
       background: #e4d7c4;
     }
 
+    .date-container {
+      font-size: 18px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
   </style>
 </head>
 <body>
@@ -214,6 +220,12 @@
     </div>
 
     <div class="main-content">
+      <!-- Дата выбора -->
+      <div class="date-container">
+        <label for="date-picker">Выберите дату:</label>
+        <input type="date" id="date-picker" onchange="changeDate()" value="2025-03-10">
+      </div>
+
       <div id="map" class="map">
         <!-- Вставленная карта -->
         <iframe id="map-iframe" src="https://www.google.com/maps/d/u/0/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1" width="800" height="600"></iframe>
@@ -244,12 +256,12 @@
   </div>
 
   <footer>
-    <p>КУРСК БОИ 2025</p>
+    <p>&copy; 2025 КУРСК БОИ 2025. Все права защищены.</p>
   </footer>
 
   <script>
     let currentLanguage = 'ru';
-    let currentDate = '10.03.2025'; // Начальная дата
+    let currentDate = '10.03.2025';
 
     function toggleLanguageModal() {
       const modal = document.getElementById('language-modal');
@@ -269,7 +281,6 @@
     }
 
     function updateTextBasedOnLanguage() {
-      // Пример обновления текста, исходя из выбранного языка
       if (currentLanguage === 'ru') {
         document.getElementById('sidebar-title').innerText = 'Дополнительная информация';
         document.getElementById('sidebar-description').innerText = 'Ситуация в Курске напряженная.';
@@ -291,29 +302,34 @@
     function toggleNewsModal() {
       const modal = document.getElementById('news-modal');
       modal.classList.add('open');
+      const map = document.getElementById('map');
+      map.style.display = 'none';
     }
 
     function closeNewsModal() {
       const modal = document.getElementById('news-modal');
       modal.classList.remove('open');
+      const map = document.getElementById('map');
+      map.style.display = 'block';
     }
 
     function supportAuthor() {
       alert('Спасибо за поддержку!');
     }
 
-    function updateMapBasedOnDate() {
+    function changeDate() {
+      const dateInput = document.getElementById('date-picker');
+      currentDate = dateInput.value;
+
       const iframe = document.getElementById('map-iframe');
-      if (currentDate === '09.03.2025') {
+      if (currentDate === '2025-03-09') {
         iframe.src = 'https://www.google.com/maps/d/u/0/embed?mid=1zZ5X7Kwt1WGYDPihPrG6Gih_8wY6Ae8&ehbc=2E312F&noprof=1';
       } else {
         iframe.src = 'https://www.google.com/maps/d/u/0/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1';
       }
     }
 
-    // Инициализация
     updateTextBasedOnLanguage();
-    updateMapBasedOnDate();
   </script>
 </body>
 </html>

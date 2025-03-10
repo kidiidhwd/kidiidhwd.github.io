@@ -10,157 +10,138 @@
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-        header {
-            background-color: #2c3e50;
-            color: white;
+
+        /* Рамка для изменения даты */
+        .date-frame {
+            border: 2px solid #d4b899;
+            margin: 20px;
             padding: 10px;
-            text-align: center;
+            display: flex;
+            justify-content: center;
         }
-        #map {
+
+        /* Стили для карты */
+        #map-container {
             width: 100%;
-            height: 500px;
-            background-color: #f1f1f1;
+            height: 480px;
+            background-color: #f0f0f0;
         }
-        .button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .button:hover {
-            background-color: #45a049;
-        }
+
+        /* Модальное окно с новостями */
         #newsModal {
             display: none;
             position: fixed;
-            z-index: 1;
-            left: 0;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            text-align: center;
-            padding-top: 50px;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
         }
-        #newsModalContent {
-            background-color: white;
-            margin: 0 auto;
+
+        #newsModal .modal-content {
+            background-color: #fff;
             padding: 20px;
+            border-radius: 5px;
             width: 80%;
             max-width: 600px;
+            text-align: left;
         }
-        .close {
-            color: #aaa;
-            font-size: 28px;
+
+        .modal-content h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .modal-content p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content a {
+            color: #007bff;
+            text-decoration: none;
             font-weight: bold;
+        }
+
+        .modal-content a:hover {
+            text-decoration: underline;
+        }
+
+        /* Кнопка новостей */
+        .news-button {
+            cursor: pointer;
+            color: #007bff;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        /* Стиль для закрытия окна */
+        .close-btn {
             position: absolute;
             top: 10px;
-            right: 25px;
-            font-size: 36px;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
+            right: 10px;
+            font-size: 20px;
             cursor: pointer;
         }
-        #dateSelector {
-            margin: 20px;
-            padding: 10px;
-            background-color: #f1f1f1;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        #dateSelectorLabel {
-            font-size: 16px;
-            margin-right: 10px;
-        }
-        .infoBox {
-            margin: 20px 0;
-            background-color: #f9f9f9;
-            padding: 10px;
-            border-radius: 8px;
-            text-align: center;
-        }
-        .infoBox h2 {
-            margin: 0;
-            font-size: 20px;
-        }
-        .infoBox p {
-            font-size: 16px;
-        }
+
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Бои Курск 2025</h1>
-</header>
-
-<!-- Date Selector with Beige Border -->
-<div id="dateSelector" class="infoBox">
-    <label id="dateSelectorLabel">Выберите дату: </label>
-    <input type="date" id="dateInput" value="2025-03-10" class="button">
+<div class="date-frame">
+    <label for="dateSelect">Выберите дату:</label>
+    <select id="dateSelect">
+        <option value="10.03.2025" selected>10.03.2025</option>
+        <option value="09.03.2025">09.03.2025</option>
+    </select>
 </div>
 
-<!-- Map Container -->
-<div id="map">
-    <iframe id="mapIframe" src="https://www.google.com/maps/d/u/0/embed?mid=1zZ5X7Kwt1WGYDPihPrG6Gih_8wY6Ae8&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>
+<div id="map-container">
+    <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1zZ5X7Kwt1WGYDPihPrG6Gih_8wY6Ae8&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>
 </div>
 
-<!-- Additional Information Section -->
-<div class="infoBox">
-    <h2>Дополнительная информация 🌍</h2>
-    <p>Ситуация в Курске остается напряженной, несмотря на усилия украинских войск по сдерживанию атак.</p>
-</div>
+<h2>Дополнительная информация</h2>
+<p>Ситуация в Курске остается напряженной.</p>
 
-<!-- News Section -->
-<div class="infoBox">
-    <h2>Новости 📢</h2>
-    <button class="button" onclick="openNewsModal()">Открыть новости</button>
-</div>
+<!-- Кнопка новостей -->
+<a href="#" class="news-button" id="newsButton">Новости</a>
 
-<!-- Modal for News -->
+<!-- Модальное окно с новостями -->
 <div id="newsModal">
-    <div id="newsModalContent">
-        <span class="close" onclick="closeNewsModal()">&times;</span>
-        <h3>Новости о Курских боях</h3>
+    <div class="modal-content">
+        <span class="close-btn" id="closeModal">&times;</span>
+        <h2>Новости</h2>
         <p>Россия на прошлой неделе перебросила в Курскую область одно из самых эффективных подразделений беспилотников, а также сотни северокорейских военных вместе с морской пехотой и десантниками. Об этом пишет Forbes.</p>
         <p>Наступление РФ началось в тот момент, когда администрация президента США Дональда Трампа прекратила поставлять Украине разведданные и боеприпасы. Это уже привело к потере части отвоеванных территорий и создает угрозу для главной дороги, ведущей к ключевой украинской военной базе в городе Суджа, отмечает издание.</p>
-        <a href="https://news.google.com/search?q=Курск%20война%20новости" target="_blank" class="button">Читать подробнее</a>
+        <a href="https://news.google.com/search?q=Курск%20война%20новости" target="_blank">Читать больше</a>
     </div>
 </div>
 
-<!-- Author Support Section -->
-<div class="infoBox">
-    <h2>Поддержка автора 💖</h2>
-    <button class="button" onclick="alert('Спасибо за вашу поддержку!')">Помочь</button>
-</div>
-
 <script>
-    function openNewsModal() {
-        document.getElementById("newsModal").style.display = "block";
-        document.getElementById("map").style.display = "none"; // Hide map when news is open
-    }
-
-    function closeNewsModal() {
-        document.getElementById("newsModal").style.display = "none";
-        document.getElementById("map").style.display = "block"; // Show map when news is closed
-    }
-
-    document.getElementById('dateInput').addEventListener('change', function () {
-        const selectedDate = this.value;
-        const mapIframe = document.getElementById('mapIframe');
-        
-        if (selectedDate === '2025-03-09') {
-            mapIframe.src = "https://www.google.com/maps/d/u/0/embed?mid=1zZ5X7Kwt1WGYDPihPrG6Gih_8wY6Ae8&ehbc=2E312F&noprof=1";
+    // Обработчик изменения даты
+    document.getElementById("dateSelect").addEventListener("change", function() {
+        var date = this.value;
+        if (date === "09.03.2025") {
+            document.getElementById("map-container").innerHTML = '<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1zZ5X7Kwt1WGYDPihPrG6Gih_8wY6Ae8&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>';
         } else {
-            mapIframe.src = "https://www.google.com/maps/d/u/0/embed?mid=1zZ5X7Kwt1WGYDPihPrG6Gih_8wY6Ae8&ehbc=2E312F&noprof=1";
+            document.getElementById("map-container").innerHTML = '<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1VksAdNzXU9wRHYfGf8waAlfj44KKBG3o&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>';
         }
+    });
+
+    // Открытие модального окна
+    document.getElementById("newsButton").addEventListener("click", function(event) {
+        event.preventDefault();
+        document.getElementById("newsModal").style.display = "flex";
+    });
+
+    // Закрытие модального окна
+    document.getElementById("closeModal").addEventListener("click", function() {
+        document.getElementById("newsModal").style.display = "none";
     });
 </script>
 

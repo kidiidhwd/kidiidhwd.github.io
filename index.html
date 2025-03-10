@@ -3,260 +3,275 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Бои за Курск Карта</title>
+  <title>Боись за Курск</title>
   <style>
-    /* Общие стили */
     body {
-      font-family: 'Montserrat', sans-serif;
+      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #f0ead6, #fff);
-      color: #333;
-      line-height: 1.6;
-      overflow-x: hidden;
+      background: #f4f4f4;
     }
+
     header {
+      background: #e4d7c4;
+      padding: 20px;
       text-align: center;
-      padding: 1.5em 0;
-      border-bottom: 3px solid #c4a89f;
-      background: linear-gradient(to right, #e4d7c4, #d9b8a3);
-      color: #333;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-      text-transform: uppercase;
-      animation: fadeInDown 1s ease-out;
+      font-size: 24px;
+      font-weight: bold;
     }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+
     .container {
       display: flex;
-      flex-wrap: wrap;
-      min-height: calc(100vh - 80px);
-      padding: 20px;
-      box-sizing: border-box;
-      animation: fadeIn 1.5s ease;
+      justify-content: space-between;
+      margin: 20px;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    /* Сайдбар */
+
     .sidebar {
-      flex: 0 0 300px;
-      background: linear-gradient(to bottom, #e4d7c4, #d9b8a3);
-      border-radius: 10px;
-      box-shadow: 4px 0 10px rgba(0,0,0,0.2);
+      width: 25%;
+      background: #f9f9f9;
       padding: 20px;
-      margin-right: 20px;
-      margin-bottom: 20px;
-      transition: transform 0.3s ease;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-    .sidebar:hover {
-      transform: scale(1.02);
-    }
+
     .sidebar h2 {
-      margin-top: 0;
-      margin-bottom: 15px;
-      color: #333;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    }
-    .sidebar p {
+      font-size: 20px;
       margin-bottom: 20px;
-      font-size: 1em;
     }
-    .sidebar .controls {
-      margin-top: 20px;
+
+    .sidebar p {
+      font-size: 16px;
+      margin-bottom: 20px;
     }
-    .sidebar .controls label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-      color: #333;
-    }
-    .sidebar .controls input {
-      width: calc(100% - 12px);
-      padding: 8px;
-      margin-bottom: 15px;
-      background-color: #f5f5dc;
-      border: 1px solid #d9b8a3;
-      border-radius: 5px;
-      color: #333;
-      transition: border-color 0.3s;
-    }
-    .sidebar .controls input:focus {
-      border-color: #c4a89f;
-      outline: none;
-    }
-    .sidebar .nav-item {
-      display: flex;
-      align-items: center;
-      padding: 12px;
+
+    .sidebar-button {
+      padding: 10px;
       background-color: #d9b8a3;
-      border: 1px solid #c4a89f;
-      border-radius: 5px;
+      color: white;
+      border: none;
+      width: 100%;
+      border-radius: 10px;
       cursor: pointer;
       transition: background-color 0.3s, transform 0.2s;
-      margin-bottom: 10px;
     }
-    .sidebar .nav-item:hover {
-      background-color: #e4d7c4;
-      transform: scale(1.03);
+
+    .sidebar-button:hover {
+      background-color: #c4a89f;
+      transform: scale(1.1);
     }
-    .sidebar .nav-item img {
-      margin-right: 10px;
+
+    .language-button {
+      margin-top: 20px;
+      cursor: pointer;
+      background: #d9b8a3;
+      color: white;
+      padding: 10px;
+      border-radius: 50%;
+      font-size: 20px;
+      display: inline-block;
+      text-align: center;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      transition: background-color 0.3s;
     }
-    /* Карта */
-    .map-container {
-      flex: 1;
-      position: relative;
-      border-radius: 10px;
-      overflow: hidden;
-      min-height: 400px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+    .language-button:hover {
+      background-color: #c4a89f;
     }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      border-radius: 10px;
-      transition: opacity 0.5s;
-    }
-    /* Модальное окно с новостями */
-    #article-container {
-      position: absolute;
+
+    .language-modal {
+      display: none;
+      position: fixed;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(255, 255, 255, 0.97);
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .language-modal-content {
+      background: #fff;
       padding: 20px;
-      overflow-y: auto;
-      z-index: 10;
-      display: none;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      animation: modalIn 0.5s ease-out;
+      display: flex;
+      justify-content: space-around;
+      width: 300px;
     }
-    @keyframes modalIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    #article-container h3 {
-      margin-top: 0;
-      margin-bottom: 10px;
-    }
-    #article-container p {
-      margin: 10px 0;
-      font-size: 1em;
-    }
-    #article-container a {
-      color: #0073e6;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    #article-container a:hover {
-      text-decoration: underline;
-    }
-    .close-button, .refresh-button {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 10px 20px;
-      background-color: #d9b8a3;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.2s;
-    }
-    .close-button:hover, .refresh-button:hover {
-      background-color: #c4a89f;
-      transform: scale(1.05);
-    }
-    /* Адаптивные стили */
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-      }
-      .sidebar {
-        margin-right: 0;
-        margin-bottom: 20px;
-      }
-      .map-container {
-        min-height: 300px;
-      }
-    }
-    @media (max-width: 480px) {
-      header {
-        font-size: 1.2em;
-      }
-      .sidebar, .map-container {
-        padding: 10px;
-      }
-      .sidebar .nav-item {
-        padding: 10px;
-      }
-      .sidebar .controls input {
-        width: calc(100% - 10px);
-      }
-    }
-    /* Для кнопки языка */
-    .language-button {
-      display: inline-block;
-      margin-left: 10px;
+
+    .language-option {
       padding: 10px;
       background-color: #d9b8a3;
       color: white;
-      border-radius: 50%;
+      border-radius: 10px;
       cursor: pointer;
       transition: background-color 0.3s, transform 0.2s;
     }
-    .language-button:hover {
+
+    .language-option:hover {
       background-color: #c4a89f;
       transform: scale(1.1);
     }
-    /* Модальное окно для изменения языка */
-    #language-modal {
-      position: absolute;
-      top: 50px;
-      left: 0;
-      right: 0;
-      background: rgba(255, 255, 255, 0.9);
+
+    .main-content {
+      flex: 1;
       padding: 20px;
-      display: none;
+      background: #fff;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
+
+    .map {
+      width: 100%;
+      height: 500px;
+      background-color: #f4f4f4;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      margin-top: 30px;
+      background: #e4d7c4;
+    }
+    
+    /* Дополнительные стили для улучшения визуального восприятия */
+    .popup {
+      background-color: #f5f5f5;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    .popup-button {
+      background-color: #e7a149;
+      color: white;
+      padding: 12px;
+      font-size: 14px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .popup-button:hover {
+      background-color: #d7853b;
+      transform: scale(1.05);
+    }
+
+    /* Анимация модального окна */
+    @keyframes modalAnimation {
+      0% {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .modal-content {
+      animation: modalAnimation 0.3s ease-out;
+    }
+    
+    /* Всплывающее сообщение */
+    .alert-box {
+      background-color: #f44336;
+      color: white;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 5px;
+      font-size: 16px;
+      display: none;
+    }
+
   </style>
 </head>
 <body>
   <header>
-    <h1>БОИ ЗА КУРСК КАРТА</h1>
+    <h1 id="site-title">Бои за Курск</h1>
   </header>
+
   <div class="container">
     <div class="sidebar">
-      <div class="flag"></div>
-      <h2>ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ</h2>
-      <p>
-        Здесь может быть текст о героизме украинских воинов во время боёв за Курск, ссылки на исторические документы и т.д.
-      </p>
-      <div class="controls">
-        <label for="date">Дата:</label>
-        <input type="date" id="date" value="2025-03-09">
+      <h2 id="sidebar-title">Новости</h2>
+      <p id="sidebar-text">Здесь отображается информация о текущих событиях на фронте и новости, которые важны для данной темы. Для подробностей перейдите на <a href="https://news.google.com" target="_blank">Google Новости</a>.</p>
+      <button class="sidebar-button" id="support-author-button">
+        Поддержать автора
+      </button>
+      <div class="language-button" onclick="toggleLanguageModal()">🇷🇺</div>
+      <div id="language-modal" class="language-modal">
+        <div class="language-modal-content">
+          <div class="language-option" onclick="changeLanguage('ru')">Русский</div>
+          <div class="language-option" onclick="changeLanguage('uk')">Українська</div>
+          <div class="language-option" onclick="changeLanguage('en')">English</div>
+        </div>
       </div>
-      <div class="nav-item" onclick="showNews()">
-        <img src="https://img.icons8.com/material-outlined/24/000000/bar-chart.png" alt="News">
-        Новости
-      </div>
-      <div class="nav-item" onclick="showSupport()">
-        💵 Поддержать автора
+      <div id="alert-box" class="alert-box">Ошибка загрузки новостей. Попробуйте еще раз.</div>
+    </div>
+
+    <div class="main-content">
+      <div id="map" class="map">
+        <!-- Вставьте сюда карту или используйте библиотеку для отображения карты -->
+        Карта с боевыми действиями за Курск
       </div>
     </div>
-    <div class="map-container">
-      <iframe id="map-iframe" src="https://www.google.com/maps/d/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1"></iframe>
-      <!-- Модальное окно с новостями -->
-      <div id="article-container">
-        <h3>Новости Курск война</h3>
-        <p>
-          Здесь вы найдёте свежие материалы по теме <strong>"Курск война новости"</strong>. Узнайте последние обновления и аналитику, связанную с военными событиями в регионе. Дата публикации: <span id="news-date-text">2025-03
+  </div>
+
+  <footer>
+    <p>Автор: Ваше Имя</p>
+  </footer>
+
+  <script>
+    let currentLanguage = 'ru';
+
+    function toggleLanguageModal() {
+      const modal = document.getElementById('language-modal');
+      modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function changeLanguage(language) {
+      currentLanguage = language;
+      loadContentBasedOnLanguage(language);
+      document.getElementById('language-modal').style.display = 'none';
+    }
+
+    function loadContentBasedOnLanguage(language) {
+      const title = document.getElementById('site-title');
+      const sidebarTitle = document.getElementById('sidebar-title');
+      const sidebarText = document.getElementById('sidebar-text');
+      const alertBox = document.getElementById('alert-box');
+
+      // Содержимое для разных языков
+      if (language === 'ru') {
+        title.textContent = 'Бои за Курск';
+        sidebarTitle.textContent = 'Новости';
+        sidebarText.innerHTML = 'Здесь отображается информация о текущих событиях на фронте и новости, которые важны для данной темы. Для подробностей перейдите на <a href="https://news.google.com" target="_blank">Google Новости</a>.';
+        alertBox.textContent = 'Ошибка загрузки новостей. Попробуйте еще раз.';
+      } else if (language === 'uk') {
+        title.textContent = 'Бої за Курськ';
+        sidebarTitle.textContent = 'Новини';
+        sidebarText.innerHTML = 'Тут відображається інформація про поточні події на фронті та новини, які важливі для цієї теми. Для подробиць перейдіть на <a href="https://news.google.com" target="_blank">Google Новини</a>.';
+        alertBox.textContent = 'Помилка завантаження новин. Спробуйте ще раз.';
+      } else if (language === 'en') {
+        title.textContent = 'Battles for Kursk';
+        sidebarTitle.textContent = 'News';
+        sidebarText.innerHTML = 'This section displays information on the current events on the front and news relevant to the theme. For more details, visit <a href="https://news.google.com" target="_blank">Google News</a>.';
+        alertBox.textContent = 'Error loading news. Please try again.';
+      }
+    }
+
+    // Функция для поддержки автора
+    document.getElementById('support-author-button').addEventListener('click', function() {
+      alert("Спасибо за вашу поддержку!");
+    });
+  </script>
+</body>
+</html>
+

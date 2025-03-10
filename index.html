@@ -1,215 +1,295 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Боись за Курск</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f9f5eb;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Боись за Курск</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f5eb;
+    }
 
-        header {
-            background: #e4d7c4;
-            padding: 20px;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-        }
+    header {
+      background: #e4d7c4;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
 
-        .container {
-            display: flex;
-            justify-content: space-between;
-            margin: 20px;
-        }
+    .container {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px;
+    }
 
-        .sidebar {
-            width: 25%;
-            background: #f3f1e3;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
+    .sidebar {
+      width: 25%;
+      background: #f3f1e3;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
 
-        .sidebar h2 {
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
+    .sidebar h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
 
-        .sidebar p {
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
+    .sidebar p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
 
-        .sidebar-button {
-            padding: 15px;
-            background-color: #d9b8a3;
-            color: white;
-            border: none;
-            width: 100%;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-            margin-bottom: 10px;
-        }
+    .sidebar-button {
+      padding: 15px;
+      background-color: #d9b8a3;
+      color: white;
+      border: none;
+      width: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      margin-bottom: 10px;
+    }
 
-        .sidebar-button:hover {
-            background-color: #c4a89f;
-            transform: scale(1.1);
-        }
+    .sidebar-button:hover {
+      background-color: #c4a89f;
+      transform: scale(1.1);
+    }
 
-        .language-button {
-            margin-top: 10px;
-            cursor: pointer;
-            background: #d9b8a3;
-            color: white;
-            padding: 10px;
-            border-radius: 50%;
-            font-size: 20px;
-            display: inline-block;
-            text-align: center;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
-            transition: background-color 0.3s;
-        }
+    .language-button {
+      margin-top: 10px;
+      cursor: pointer;
+      background: #d9b8a3;
+      color: white;
+      padding: 10px;
+      border-radius: 50%;
+      font-size: 20px;
+      display: inline-block;
+      text-align: center;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      transition: background-color 0.3s;
+    }
 
-        .language-button:hover {
-            background-color: #c4a89f;
-        }
+    .language-button:hover {
+      background-color: #c4a89f;
+    }
 
-        .language-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
+    .language-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
 
-        .language-modal-content {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-around;
-            width: 300px;
-        }
+    .language-modal-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-around;
+      width: 300px;
+    }
 
-        .language-option {
-            padding: 10px;
-            background-color: #d9b8a3;
-            color: white;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-        }
+    .language-option {
+      padding: 10px;
+      background-color: #d9b8a3;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
 
-        .language-option:hover {
-            background-color: #c4a89f;
-            transform: scale(1.1);
-        }
+    .language-option:hover {
+      background-color: #c4a89f;
+      transform: scale(1.1);
+    }
 
-        .main-content {
-            flex: 1;
-            padding: 20px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            position: relative; /* Добавлено для абсолютного позиционирования новостного модального окна */
-        }
+    .main-content {
+      flex: 1;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
 
-        .map {
-            width: 100%;
-            height: 500px;
-            background-color: #d9b8a3;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
+    .map {
+      width: 100%;
+      height: 500px;
+      background-color: #d9b8a3;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
 
-        footer {
-            text-align: center;
-            padding: 10px;
-            margin-top: 30px;
-            background: #e4d7c4;
-        }
+    footer {
+      text-align: center;
+      padding: 10px;
+      margin-top: 30px;
+      background: #e4d7c4;
+    }
+    
+    /* Дополнительные стили для улучшения визуального восприятия */
+    .popup {
+      background-color: #f5f5f5;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
 
-        .alert-box {
-            background-color: #f44336;
-            color: white;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
-            font-size: 16px;
-            display: none;
-        }
+    .popup-button {
+      background-color: #e7a149;
+      color: white;
+      padding: 12px;
+      font-size: 14px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-        #news-modal {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            display: none;
-            z-index: 10;
-        }
+    .popup-button:hover {
+      background-color: #d7853b;
+      transform: scale(1.05);
+    }
 
-        #news-modal .language-modal-content {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 600px;
-        }
-    </style>
+    /* Анимация модального окна */
+    @keyframes modalAnimation {
+      0% {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .modal-content {
+      animation: modalAnimation 0.3s ease-out;
+    }
+
+    /* Всплывающее сообщение */
+    .alert-box {
+      background-color: #f44336;
+      color: white;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 5px;
+      font-size: 16px;
+      display: none;
+    }
+
+  </style>
 </head>
 <body>
-    <header>
-        <h1 id="site-title">Бои за Курск</h1>
-    </header>
+  <header>
+    <h1 id="site-title">Бои за Курск</h1>
+  </header>
 
-    <div class="container">
-        <div class="sidebar">
-            <div class="language-button" onclick="toggleLanguageModal()">🇷🇺</div>
-            <h2 id="sidebar-title">Новости</h2>
-            <p id="sidebar-text">Здесь отображается информация о текущих событиях на фронте и новости, которые важны для данной темы. Для подробностей перейдите на <a href="https://news.google.com" target="_blank">Google Новости</a>.</p>
-            <button class="sidebar-button" id="support-author-button">Поддержать автора</button>
-            <div id="language-modal" class="language-modal">
-                <div class="language-modal-content">
-                    <div class="language-option" onclick="changeLanguage('ru')">Русский</div>
-                    <div class="language-option" onclick="changeLanguage('uk')">Українська</div>
-                    <div class="language-option" onclick="changeLanguage('en')">English</div>
-                </div>
-            </div>
-            <div id="alert-box" class="alert-box">Ошибка загрузки новостей. Попробуйте еще раз.</div>
-            <button class="sidebar-button" id="news-button" onclick="toggleNewsModal()">Новости</button>
-            <div id="news-modal" class="language-modal">
-                <div class="language-modal-content">
-                    <h3>Бои курск</h3>
-                    <p>Читать подробнее:: <a href="https://news.google.com/search?q=%D0%9A%D1%83%D1%80%D1%81%D0%BA" target="_blank">Google Новости</a></p>
-                    <button onclick="closeNewsModal()">Закрыть</button>
-                </div>
-            </div>
+  <div class="container">
+    <div class="sidebar">
+      <div class="language-button" onclick="toggleLanguageModal()">🕊️</div>
+      <h2 id="sidebar-title">Новости</h2>
+      <p id="sidebar-text">Здесь отображается информация о текущих событиях на фронте и новости, которые важны для данной темы. Для подробностей перейдите на <a href="https://news.google.com" target="_blank">Google Новости</a>.</p>
+      <button class="sidebar-button" id="support-author-button">
+        Поддержать автора
+      </button>
+      <div id="language-modal" class="language-modal">
+        <div class="language-modal-content">
+          <div class="language-option" onclick="changeLanguage('ru')">Русский</div>
+          <div class="language-option" onclick="changeLanguage('uk')">Українська</div>
+          <div class="language-option" onclick="changeLanguage('en')">English</div>
         </div>
-
-        <div class="main-content">
-            <div id="map" class="map">
-                <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>
-            </div>
+      </div>
+      <div id="alert-box" class="alert-box">Ошибка загрузки новостей. Попробуйте еще раз.</div>
+      <!-- Кнопка новости с модальным окном -->
+      <button class="sidebar-button" id="news-button" onclick="toggleNewsModal()">Новости</button>
+      <div id="news-modal" class="language-modal">
+        <div class="language-modal-content">
+          <h3>Курс к бою</h3>
+          <p>Для подробной информации по теме боев на Курской дуге, переходите по ссылке: <a href="https://news.google.com/search?q=%D0%9A%D1%83%D1%80%D1%81%D0%BA" target="_blank">Google Новости</a></p>
+          <button onclick="closeNewsModal()">Закрыть</button>
         </div>
+      </div>
     </div>
 
-    <footer>
-        <p>Автор: КАРТА БОИ КУРСК</p>
-    </footer>
+    <div class="main-content">
+      <div id="map" class="map">
+        <!-- Вставленная карта -->
+        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>
+      </div>
+    </div>
+  </div>
 
-    <script>
+  <footer>
+    <p>Автор: Ваше Имя</p>
+  </footer>
+
+  <script>
+    let currentLanguage = 'ru';
+
+    function toggleLanguageModal() {
+      const modal = document.getElementById('language-modal');
+      modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function changeLanguage(language) {
+      currentLanguage = language;
+      loadContentBasedOnLanguage(language);
+      document.getElementById('language-modal').style.display = 'none';
+    }
+
+    function loadContentBasedOnLanguage(language) {
+      const title = document.getElementById('site-title');
+      const sidebarTitle = document.getElementById('sidebar-title');
+      const sidebarText = document.getElementById('sidebar-text');
+      const alertBox = document.getElementById('alert-box');
+
+      // Содержимое для разных языков
+      if (language === 'ru') {
+        title.textContent = 'Бои за Курск';
+        sidebarTitle.textContent = 'Новости';
+        sidebarText.innerHTML = 'Здесь отображается информация о текущих событиях на фронте и новости, которые важны для данной темы. Для подробностей перейдите на <a href="https://news.google.com" target="_blank">Google Новости</a>.';
+        alertBox.textContent = 'Ошибка загрузки новостей. Попробуйте еще раз.';
+      } else if (language === 'uk') {
+        title.textContent = 'Бої за Курськ';
+        sidebarTitle.textContent = 'Новини';
+        sidebarText.innerHTML = 'Тут відображаються новини та важлива інформація про бої на Курській дузі. Для подробиць перейдіть на <a href="https://news.google.com" target="_blank">Google Новини</a>.';
+        alertBox.textContent = 'Помилка завантаження новин. Спробуйте ще раз.';
+      } else if (language === 'en') {
+        title.textContent = 'Battles for Kursk';
+        sidebarTitle.textContent = 'News';
+        sidebarText.innerHTML = 'Here is the information about the ongoing battles on the Kursk Front. For more details, visit <a href="https://news.google.com" target="_blank">Google News</a>.';
+        alertBox.textContent = 'Error loading news. Please try again.';
+      }
+    }
+
+    function toggleNewsModal() {
+      const modal = document.getElementById('news-modal');
+      const map = document.getElementById('map');
+      modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+      map.style.display = modal.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function closeNewsModal() {
+      const modal = document.getElementById('news-modal');
+      const map = document.getElementById('map');
+      modal.style.display = 'none';
+      map.style.display = 'block';
+    }
+  </script>
+</body>
+</html>

@@ -122,6 +122,18 @@
             flex: 1 1 45%;
             margin: 20px;
         }
+
+        /* Новый стиль кнопки */
+        .button {
+            padding: 15px;
+            background-color: #f0c14b;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 300px;
+            margin: 10px;
+        }
     </style>
 </head>
 <body>
@@ -169,6 +181,7 @@
     newsBtn.addEventListener('click', () => {
         newsText.style.display = 'block';
         iframe.style.display = 'none';  // Скрыть карту
+        newsText.classList.add('fadeIn'); // Добавить анимацию
     });
 
     // Закрытие новостей

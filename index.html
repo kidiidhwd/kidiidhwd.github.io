@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Бои за Курск Карта</title>
   <style>
+    /* Общие стили */
     body {
       font-family: 'Montserrat', sans-serif;
       margin: 0;
@@ -17,16 +18,20 @@
     header {
       text-align: center;
       padding: 1.5em 0;
+      border-bottom: 3px solid #c4a89f;
       background: linear-gradient(to right, #e4d7c4, #d9b8a3);
-      color: #333;
-      text-transform: uppercase;
+      position: relative;
     }
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      min-height: calc(100vh - 80px);
-      padding: 20px;
-      box-sizing: border-box;
+    .language-switch {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: url('https://upload.wikimedia.org/wikipedia/en/a/a9/Flag_of_the_United_Kingdom.svg') center/cover no-repeat;
+      cursor: pointer;
     }
     .sidebar {
       flex: 0 0 300px;
@@ -34,154 +39,98 @@
       border-radius: 10px;
       padding: 20px;
       margin-right: 20px;
-      margin-bottom: 20px;
     }
-    .sidebar h2 { margin-top: 0; }
-    .news-button {
-      display: block;
-      padding: 10px;
-      background: #c4a89f;
-      text-align: center;
-      border-radius: 5px;
-      color: white;
-      text-decoration: none;
-      margin-bottom: 10px;
-    }
-    .map-container {
-      flex: 1;
-      position: relative;
-      border-radius: 10px;
-      overflow: hidden;
-      min-height: 400px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      border-radius: 10px;
-      position: relative;
-      z-index: 1;
-    }
-    .map-overlay {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      background: rgba(255, 255, 255, 0.8);
-      padding: 10px;
-      border-radius: 5px;
-    }
-    .support-section {
-      margin-top: 20px;
-      text-align: center;
-    }
-    .support-section button {
-      padding: 10px 20px;
-      background: #d9b8a3;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .language-switch {
-      margin-top: 20px;
-      text-align: center;
-    }
-    .language-button {
+    .nav-item {
       display: flex;
       align-items: center;
-      justify-content: center;
-      background: none;
-      border: none;
+      padding: 12px;
+      background-color: #d9b8a3;
+      border-radius: 5px;
       cursor: pointer;
+      margin-bottom: 10px;
     }
-    .language-button img {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      margin-right: 5px;
+    .support-button {
+      display: block;
+      text-align: center;
+      background: #ff9800;
+      color: white;
+      padding: 12px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
     }
-    @media (max-width: 768px) {
-      .map-container { min-height: 500px; }
-    }
-    @media (max-width: 480px) {
-      .map-container { min-height: 600px; }
+    .support-button:hover {
+      background: #e68900;
     }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
     <h1 id="title">БОИ ЗА КУРСК КАРТА</h1>
+    <button class="language-switch" onclick="switchLanguage()"></button>
   </header>
   <div class="container">
     <div class="sidebar">
-      <a href="#" class="news-button">Новости</a>
       <h2 id="info-title">ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ</h2>
-      <p id="info-text">Здесь может быть текст о событиях, связанных с боевыми действиями в регионе.</p>
-      <div class="support-section">
-        <h3 id="support-title">Поддержать автора</h3>
-        <button id="support-button">Помочь проекту</button>
+      <p id="info-text">
+        Здесь может быть текст о героизме украинских воинов во время боёв за Курск.
+      </p>
+      <div class="nav-item" onclick="showNews()">
+        <img src="https://img.icons8.com/material-outlined/24/000000/bar-chart.png" alt="News">
+        <span id="news-button">Новости</span>
       </div>
-      <div class="language-switch">
-        <button class="language-button" onclick="toggleLanguage()">
-          <img id="language-flag" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Flag_of_Free_Russia.svg/1280px-Flag_of_Free_Russia.svg.png" alt="Язык">
-          <span id="language-text">Русский</span>
-        </button>
-      </div>
+      <a href="https://www.buymeacoffee.com/author" class="support-button" id="support-button">Поддержка автора</a>
     </div>
     <div class="map-container">
-      <iframe id="map-iframe" src="https://www.google.com/maps/d/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1"></iframe>
-      <div class="map-overlay">
-        <a href="https://www.google.com/maps/d/viewer?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA" target="_blank">Открыть карту</a>
-      </div>
+      <iframe id="map-iframe" src="https://www.google.com/maps/d/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA"></iframe>
     </div>
   </div>
   <footer>
-    <p>&copy; 2025 Бои за Курск Карта</p>
+    <p>&copy; 2025 <span id="footer-text">Бои за Курск Карта</span></p>
   </footer>
   <script>
-    let currentLanguage = 'ru';
-    function toggleLanguage() {
-      const languages = {
-        ru: {
-          title: "БОИ ЗА КУРСК КАРТА",
-          "info-title": "ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ",
-          "info-text": "Здесь может быть текст о событиях, связанных с боевыми действиями в регионе.",
-          "support-title": "Поддержать автора",
-          "support-button": "Помочь проекту",
-          flag: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Flag_of_Free_Russia.svg/1280px-Flag_of_Free_Russia.svg.png",
-          langText: "Русский",
-        },
-        uk: {
-          title: "БОЇ ЗА КУРСЬК КАРТА",
-          "info-title": "ДОДАТКОВА ІНФОРМАЦІЯ",
-          "info-text": "Тут може бути текст про події, пов’язані з бойовими діями у регіоні.",
-          "support-title": "Підтримати автора",
-          "support-button": "Допомогти проекту",
-          flag: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/1280px-Flag_of_Ukraine.svg.png",
-          langText: "Українська",
-        },
-        en: {
-          title: "BATTLES FOR KURSK MAP",
-          "info-title": "ADDITIONAL INFORMATION",
-          "info-text": "Here you can find information about the battles in the region.",
-          "support-title": "Support the author",
-          "support-button": "Help the project",
-          flag: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/1280px-Flag_of_the_United_States.svg.png",
-          langText: "English",
-        },
-      };
+    const languages = [
+      { code: "ru", flag: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Flag_of_Russia.svg", texts: {
+        title: "БОИ ЗА КУРСК КАРТА",
+        infoTitle: "ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ",
+        infoText: "Здесь может быть текст о героизме украинских воинов во время боёв за Курск.",
+        newsButton: "Новости",
+        supportButton: "Поддержка автора",
+        footerText: "Бои за Курск Карта"
+      }},
+      { code: "uk", flag: "https://upload.wikimedia.org/wikipedia/commons/4/49/Flag_of_Ukraine.svg", texts: {
+        title: "БОЇ ЗА КУРСЬК КАРТА",
+        infoTitle: "ДОДАТКОВА ІНФОРМАЦІЯ",
+        infoText: "Тут може бути текст про героїзм українських воїнів під час боїв за Курськ.",
+        newsButton: "Новини",
+        supportButton: "Підтримка автора",
+        footerText: "Бої за Курськ Карта"
+      }},
+      { code: "en", flag: "https://upload.wikimedia.org/wikipedia/en/a/a9/Flag_of_the_United_Kingdom.svg", texts: {
+        title: "BATTLES FOR KURSK MAP",
+        infoTitle: "ADDITIONAL INFORMATION",
+        infoText: "Here you can find text about the heroism of Ukrainian soldiers during the battles for Kursk.",
+        newsButton: "News",
+        supportButton: "Support the Author",
+        footerText: "Battles for Kursk Map"
+      }}
+    ];
+    let currentLangIndex = 0;
 
-      const languageKeys = Object.keys(languages);
-      let nextIndex = (languageKeys.indexOf(currentLanguage) + 1) % languageKeys.length;
-      currentLanguage = languageKeys[nextIndex];
-
-      document.getElementById("title").textContent = languages[currentLanguage].title;
-      document.getElementById("info-title").textContent = languages[currentLanguage]["info-title"];
-      document.getElementById("info-text").textContent = languages[currentLanguage]["info-text"];
-      document.getElementById("support-title").textContent = languages[currentLanguage]["support-title"];
-      document.getElementById("support-button").textContent = languages[currentLanguage]["support-button"];
-      document.getElementById("language-flag").src = languages[currentLanguage].flag;
-      document.getElementById("language-text").textContent = languages[currentLanguage].langText;
+    function switchLanguage() {
+      currentLangIndex = (currentLangIndex + 1) % languages.length;
+      const lang = languages[currentLangIndex];
+      
+      document.getElementById("title").textContent = lang.texts.title;
+      document.getElementById("info-title").textContent = lang.texts.infoTitle;
+      document.getElementById("info-text").textContent = lang.texts.infoText;
+      document.getElementById("news-button").textContent = lang.texts.newsButton;
+      document.getElementById("support-button").textContent = lang.texts.supportButton;
+      document.getElementById("footer-text").textContent = lang.texts.footerText;
+      
+      document.querySelector(".language-switch").style.backgroundImage = `url(${lang.flag})`;
     }
   </script>
 </body>

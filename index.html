@@ -45,7 +45,7 @@
     }
 
     .sidebar-button {
-      padding: 10px;
+      padding: 15px;
       background-color: #d9b8a3;
       color: white;
       border: none;
@@ -53,6 +53,7 @@
       border-radius: 10px;
       cursor: pointer;
       transition: background-color 0.3s, transform 0.2s;
+      margin-bottom: 10px;
     }
 
     .sidebar-button:hover {
@@ -61,7 +62,7 @@
     }
 
     .language-button {
-      margin-top: 20px;
+      margin-top: 10px;
       cursor: pointer;
       background: #d9b8a3;
       color: white;
@@ -179,7 +180,7 @@
     .modal-content {
       animation: modalAnimation 0.3s ease-out;
     }
-    
+
     /* Всплывающее сообщение */
     .alert-box {
       background-color: #f44336;
@@ -200,12 +201,12 @@
 
   <div class="container">
     <div class="sidebar">
+      <div class="language-button" onclick="toggleLanguageModal()">🇷🇺</div>
       <h2 id="sidebar-title">Новости</h2>
       <p id="sidebar-text">Здесь отображается информация о текущих событиях на фронте и новости, которые важны для данной темы. Для подробностей перейдите на <a href="https://news.google.com" target="_blank">Google Новости</a>.</p>
       <button class="sidebar-button" id="support-author-button">
         Поддержать автора
       </button>
-      <div class="language-button" onclick="toggleLanguageModal()">🇷🇺</div>
       <div id="language-modal" class="language-modal">
         <div class="language-modal-content">
           <div class="language-option" onclick="changeLanguage('ru')">Русский</div>
@@ -227,8 +228,8 @@
 
     <div class="main-content">
       <div id="map" class="map">
-        <!-- Вставьте сюда карту или используйте библиотеку для отображения карты -->
-        Карта с боевыми действиями за Курск
+        <!-- Вставленная карта -->
+        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>
       </div>
     </div>
   </div>
@@ -266,31 +267,26 @@
       } else if (language === 'uk') {
         title.textContent = 'Бої за Курськ';
         sidebarTitle.textContent = 'Новини';
-        sidebarText.innerHTML = 'Тут відображається інформація про поточні події на фронті та новини, які важливі для цієї теми. Для подробиць перейдіть на <a href="https://news.google.com" target="_blank">Google Новини</a>.';
+        sidebarText.innerHTML = 'Тут відображаються новини та важлива інформація про бої на Курській дузі. Для подробиць перейдіть на <a href="https://news.google.com" target="_blank">Google Новини</a>.';
         alertBox.textContent = 'Помилка завантаження новин. Спробуйте ще раз.';
       } else if (language === 'en') {
         title.textContent = 'Battles for Kursk';
         sidebarTitle.textContent = 'News';
-        sidebarText.innerHTML = 'This section displays information on the current events on the front and news relevant to the theme. For more details, visit <a href="https://news.google.com" target="_blank">Google News</a>.';
+        sidebarText.innerHTML = 'Here is the information about the ongoing battles on the Kursk Front. For more details, visit <a href="https://news.google.com" target="_blank">Google News</a>.';
         alertBox.textContent = 'Error loading news. Please try again.';
       }
     }
 
-    // Функция для поддержки автора
-    document.getElementById('support-author-button').addEventListener('click', function() {
-      alert("Спасибо за вашу поддержку!");
-    });
-
-    // Функция для отображения модального окна новостей
     function toggleNewsModal() {
       const modal = document.getElementById('news-modal');
       modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+      document.getElementById('map').style.display = modal.style.display === 'block' ? 'none' : 'block';
     }
 
-    // Функция для закрытия модального окна новостей
     function closeNewsModal() {
       const modal = document.getElementById('news-modal');
       modal.style.display = 'none';
+      document.getElementById('map').style.display = 'block';
     }
   </script>
 </body>

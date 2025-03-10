@@ -15,33 +15,36 @@
 
     header {
       background: #e4d7c4;
-      padding: 15px;
+      padding: 20px;
       text-align: center;
-      font-size: 20px;
+      font-size: 24px;
       font-weight: bold;
     }
 
     .container {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 10px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin: 20px;
     }
 
-    .sidebar, .main-content {
+    .sidebar {
       width: 100%;
-      max-width: 800px;
-      padding: 15px;
+      max-width: 300px;
+      background: #f3f1e3;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 20px;
       background: #fff;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      margin-bottom: 15px;
-    }
-
-    .sidebar-button, .support-button {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
+      min-width: 300px;
     }
 
     .map {
@@ -49,63 +52,110 @@
       height: 400px;
       background-color: #d9b8a3;
       border-radius: 10px;
-      position: relative;
+      margin-top: 20px;
     }
 
-    iframe {
+    .sidebar-button, .support-button {
       width: 100%;
-      height: 100%;
+      padding: 15px;
       border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-bottom: 10px;
+    }
+
+    .language-button {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      z-index: 999;
+      height: 100%;
+      overflow-y: auto;
+      width: 100%;
     }
 
     footer {
       text-align: center;
       padding: 10px;
+      margin-top: 30px;
       background: #e4d7c4;
     }
 
-    @media (min-width: 768px) {
+    @media (max-width: 768px) {
       .container {
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
       }
-
-      .sidebar {
-        width: 30%;
-      }
-
-      .main-content {
-        width: 65%;
-      }
-
-      .map {
-        height: 600px;
+      .sidebar, .main-content {
+        width: 100%;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>КУРСК БОИ 2025</h1>
+    <h1 id="site-title">КУРСК БОИ 2025</h1>
   </header>
 
   <div class="container">
     <div class="sidebar">
-      <h2>Дополнительная информация</h2>
-      <p>Ситуация в Курске остается напряжённой. В последние недели активно происходят изменения на фронте.</p>
-      <button class="sidebar-button">📰 Новости</button>
-      <button class="support-button">💬 Поддержать автора</button>
+      <div class="language-button" onclick="toggleLanguageModal()">🌍</div>
+      <h2 id="sidebar-title">Дополнительная информация</h2>
+      <p id="sidebar-description">Ситуация в Курске остается напряжённой...</p>
+      <button class="sidebar-button" id="news-button" onclick="toggleNewsModal()">📰 Новости</button>
+      <button class="support-button" onclick="supportAuthor()">💬 Поддержать</button>
     </div>
 
     <div class="main-content">
       <div class="map">
-        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA"></iframe>
+        <iframe id="map-iframe" src="https://www.google.com/maps/d/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA" width="100%" height="100%"></iframe>
       </div>
     </div>
   </div>
 
-  <footer>
-    <p>&copy; 2025 КУРСК БОИ 2025. Все права защищены.</p>
-  </footer>
+  <div id="language-modal" class="modal">
+    <div class="modal-content">
+      <h2>Выберите язык</h2>
+      <button onclick="changeLanguage('ru')">Русский</button>
+      <button onclick="changeLanguage('uk')">Українська</button>
+      <button onclick="changeLanguage('en')">English</button>
+      <button class="close-button" onclick="closeLanguageModal()">Закрыть</button>
+    </div>
+  </div>
+
+  <script>
+    function toggleLanguageModal() {
+      document.getElementById('language-modal').classList.toggle('open');
+    }
+    function closeLanguageModal() {
+      document.getElementById('language-modal').classList.remove('open');
+    }
+    function changeLanguage(lang) {
+      alert('Язык изменен на ' + lang);
+      closeLanguageModal();
+    }
+    function toggleNewsModal() {
+      alert('Открытие новостей');
+    }
+    function supportAuthor() {
+      alert('Спасибо за поддержку!');
+    }
+  </script>
 </body>
 </html>

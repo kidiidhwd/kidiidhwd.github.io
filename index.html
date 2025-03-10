@@ -192,6 +192,11 @@
       display: none;
     }
 
+    /* Стили для новости */
+    #news-modal {
+      display: none;
+    }
+
   </style>
 </head>
 <body>
@@ -217,19 +222,18 @@
       <div id="alert-box" class="alert-box">Ошибка загрузки новостей. Попробуйте еще раз.</div>
       <!-- Кнопка новости с модальным окном -->
       <button class="sidebar-button" id="news-button" onclick="toggleNewsModal()">Новости</button>
-      <div id="news-modal" class="language-modal">
-        <div class="language-modal-content">
-          <h3>Курс к бою</h3>
-          <p>Для подробной информации по теме боев на Курской дуге, переходите по ссылке: <a href="https://news.google.com/search?q=%D0%9A%D1%83%D1%80%D1%81%D0%BA" target="_blank">Google Новости</a></p>
-          <button onclick="closeNewsModal()">Закрыть</button>
-        </div>
-      </div>
     </div>
 
     <div class="main-content">
       <div id="map" class="map">
         <!-- Вставленная карта -->
         <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1W81rWbQ_LNtGIn4Mt62qFmXEIkFIquA&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>
+      </div>
+
+      <div id="news-modal" class="modal-content">
+        <h3>Курс к бою</h3>
+        <p>Для подробной информации по теме боев на Курской дуге, переходите по ссылке: <a href="https://news.google.com/search?q=%D0%9A%D1%83%D1%80%D1%81%D0%BA" target="_blank">Google Новости</a></p>
+        <button onclick="closeNewsModal()">Закрыть</button>
       </div>
     </div>
   </div>
